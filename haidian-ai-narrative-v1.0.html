@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百年京张 AI 创新带 · 总体故事线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:  #091520;
+  --navy2: #0d1b2a;
+  --gold:  #F5C842;
+  --gold2: #FFD966;
+  --teal:  #7DC0BD;
+  --body:  #BEC9D2;
+  --dim:   #7AABBF;
+  --white: #EDF1F4;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: #040d14;
+  color: var(--body);
+}
+
+/* ─── SCROLL DECK ─── */
+.deck {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.deck::-webkit-scrollbar { display: none; }
+
+/* ─── NAV DOTS ─── */
+.nav {
+  position: fixed;
+  right: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 300;
+}
+.dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(122,171,191,0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dot.on {
+  background: var(--gold);
+  transform: scale(1.8);
+}
+
+/* ─── SLIDE WRAPPER ─── */
+.sw {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  background: var(--navy);
+}
+/* all slides share --navy background */
+
+/* ─── THE 16:9 SLIDE ─── */
+.slide {
+  /* True 16:9: limited by whichever viewport dimension is the constraint */
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.2vw 5.8vw 5vw;
+}
+
+/* Subtle slide frame */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(107,158,155,0.07);
+  pointer-events: none;
+}
+
+/* Decorative corner marks */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2.5vw; height: 2.5vw;
+  border-top: 1px solid rgba(245,200,66,0.15);
+  border-left: 1px solid rgba(245,200,66,0.15);
+}
+
+/* ─── FOOTER BAR ─── */
+.foot-bar {
+  position: absolute;
+  bottom: 1.8vw;
+  left: 5.8vw;
+  right: 5.8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(107,158,155,0.12);
+  padding-top: 0.7vw;
+}
+.foot-label {
+  font-size: 0.48vw;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(122,171,191,0.4);
+}
+.foot-pg {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.7vw;
+  color: rgba(245,200,66,0.25);
+}
+
+/* ─── COVER ─── */
+.slide.cover {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 4vw 5.8vw;
+}
+
+.cover-label {
+  font-size: 0.52vw;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 2vw;
+}
+
+.cover-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.6vw;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.07;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6vw;
+}
+
+.cover-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05vw;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  margin-bottom: 2.8vw;
+}
+
+.cover-body {
+  font-size: 0.88vw;
+  line-height: 2.1;
+  color: var(--dim);
+  letter-spacing: 0.01em;
+}
+
+/* ─── SECTION LABELS ─── */
+.srow {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2vw;
+  margin-bottom: 0.5vw;
+}
+.snum {
+  font-size: 0.55vw;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.snum-zh {
+  font-size: 0.52vw;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+}
+
+.h-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.55vw;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.18;
+  margin-bottom: 0.18vw;
+}
+.h-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85vw;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.07em;
+  margin-bottom: 1.4vw;
+}
+
+.sep {
+  width: 2rem;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.3;
+  margin-bottom: 1.4vw;
+}
+
+/* ─── BODY TEXT ─── */
+p {
+  font-size: 0.88vw;
+  line-height: 1.92;
+  color: var(--body);
+  font-weight: 300;
+  margin-bottom: 0.7vw;
+  letter-spacing: 0.01em;
+}
+p:last-child { margin-bottom: 0; }
+
+.bold  { font-weight: 600; color: var(--white); }
+.gold  { color: var(--gold2); font-weight: 600; }
+.muted { color: var(--dim); }
+
+/* ─── QUESTION CALLOUT (Slide 1) ─── */
+.question {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.85vw;
+  color: var(--gold2);
+  font-weight: 600;
+  line-height: 1.38;
+  margin: 1vw 0 0.15vw;
+}
+.question-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.75vw;
+  color: var(--teal);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6vw;
+}
+.answer {
+  font-size: 0.9vw;
+  color: var(--gold2);
+  font-weight: 400;
+  line-height: 1.9;
+  margin-bottom: 0.5vw;
+  opacity: 0.9;
+}
+.coda {
+  font-size: 0.78vw;
+  color: var(--dim);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* ─── TWO PARADOXES (Slide 2) ─── */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3vw;
+  margin-top: 0.2vw;
+}
+.card {
+  border-top: 1px solid rgba(107,158,155,0.3);
+  padding-top: 0.9vw;
+}
+.card-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05vw;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.1vw;
+}
+.card-en {
+  font-size: 0.5vw;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 0.65vw;
+}
+.card p { font-size: 0.83vw; line-height: 1.86; }
+
+.insight {
+  border-top: 1px solid rgba(107,158,155,0.12);
+  padding-top: 0.9vw;
+  margin-top: 1.1vw;
+}
+.insight p { font-size: 0.83vw; line-height: 1.88; }
+
+/* ─── STRATEGY SLIDES (3 & 4) ─── */
+.strat-wrap {
+  display: grid;
+  grid-template-columns: 36% 1fr;
+  gap: 4vw;
+  align-items: start;
+  margin-top: 0.2vw;
+}
+
+.strat-left {
+  border-top: 1px solid rgba(107,158,155,0.25);
+  padding-top: 1vw;
+}
+
+.strat-tag {
+  font-size: 0.52vw;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.3vw;
+}
+.strat-tag-en {
+  font-size: 0.48vw;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  margin-bottom: 0.85vw;
+}
+.strat-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5vw;
+  font-weight: 600;
+  color: var(--gold2);
+  line-height: 1.3;
+  margin-bottom: 0.2vw;
+}
+.strat-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.68vw;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  margin-bottom: 1.2vw;
+}
+.strat-lead {
+  font-size: 0.82vw;
+  color: var(--dim);
+  line-height: 1.85;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.strat-right {
+  border-top: 1px solid rgba(107,158,155,0.1);
+  padding-top: 1vw;
+}
+.strat-right p { font-size: 0.83vw; line-height: 1.88; }
+
+/* ─── CLOSING SLIDE ─── */
+.slide.closing {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.closing-eyebrow {
+  font-size: 0.52vw;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.8vw;
+}
+
+.closing-headline-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.6vw;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.45vw;
+}
+
+.closing-headline-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05vw;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  margin-bottom: 3.2vw;
+}
+
+.closing-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 68%;
+  margin: 0 auto;
+}
+
+.closing-pillar {
+  padding: 1.5vw 2.2vw;
+  border-top: 1px solid rgba(107,158,155,0.3);
+}
+
+.closing-pillar:first-child {
+  border-right: 1px solid rgba(107,158,155,0.15);
+}
+
+.pillar-strategy {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3vw;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.3vw;
+}
+
+.pillar-zh {
+  font-size: 0.78vw;
+  font-weight: 500;
+  color: var(--body);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2vw;
+}
+
+.pillar-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.68vw;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+}
+
+.wm {
+  position: absolute;
+  right: 4vw;
+  bottom: 3.5vw;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12vw;
+  font-weight: 300;
+  color: rgba(245,200,66,0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="dot on" onclick="go(0)"></div>
+  <div class="dot"    onclick="go(1)"></div>
+  <div class="dot"    onclick="go(2)"></div>
+  <div class="dot"    onclick="go(3)"></div>
+  <div class="dot"    onclick="go(4)"></div>
+  <div class="dot"    onclick="go(5)"></div>
+</nav>
+
+<div class="deck" id="deck">
+
+<!-- ─── 0 · COVER ─── -->
+<div class="sw" id="s0">
+  <div class="slide cover">
+    <div class="cover-label">总体故事线 · Tekuma · Ver 1.0</div>
+    <div class="cover-zh">百年京张<br>AI 创新带</div>
+    <div class="cover-en">Centennial Jingzhang AI Innovation Corridor · Master Narrative</div>
+    <div class="cover-body">
+      1909年，一条铁路以折返线破解了地形的束缚。<br>
+      百年之后，同一条线上，正在积蓄另一个时代的动能。
+    </div>
+    <div class="foot-bar" style="position:absolute;bottom:1.8vw;left:5.8vw;right:5.8vw;">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">00</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 1 · HISTORICAL ANCHOR ─── -->
+<div class="sw" id="s1">
+  <div class="slide">
+    <div class="srow">
+      <span class="snum">一 · Historical Anchor</span>
+      <span class="snum-zh">历史锚点</span>
+    </div>
+    <div class="h-zh">两次折返线，两次时代命题</div>
+    <div class="h-en">Two Switchbacks, Two Epochal Questions</div>
+    <div class="sep"></div>
+
+    <p>1909年，詹天佑主持修建京张铁路，面对八达岭险峻的陡坡，他没有选择正面硬攻，而是设计了<span class="bold">人字形折返线</span>——让列车借助两段反向坡道积蓄动力、转换方向，化解了近乎不可能的爬坡难题。</p>
+    <p>这是一种东方智慧：<span class="bold">不与障碍正面硬碰，而是通过巧妙的路径设计，让阻力本身转化为动力的一部分。</span></p>
+    <p>百年之后，这条铁路沿线正在面对另一道陡坡。面对中美之间长期的AI战略竞争关系——</p>
+
+    <div class="question">中国在 AI 时代的折返线是什么？</div>
+    <div class="question-en">What is China's switchback in the age of artificial intelligence?</div>
+    <div class="answer">不是推倒重来，而是因势利导，转换路径，让每一道陡坡都成为积蓄动力的弯道。</div>
+    <p class="coda">这是百年京张 AI 创新带城市设计所要回答的核心命题。</p>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">01</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 2 · TWO PARADOXES ─── -->
+<div class="sw" id="s2">
+  <div class="slide">
+    <div class="srow">
+      <span class="snum">二 · Structural Tensions</span>
+      <span class="snum-zh">两个悖论</span>
+    </div>
+    <div class="h-zh">两个悖论，是挑战也是机遇</div>
+    <div class="h-en">Two Paradoxes — Both Challenge and Opportunity</div>
+    <div class="sep"></div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-zh">城市学的悖论</div>
+        <div class="card-en">The Urban Paradox</div>
+        <p>这里已经是<span class="bold">全球 AI 的地理中心</span>。清华、北大、中科院、智谱、字节、百度、小米……全球顶尖 AI 研发力量沿京张铁路沿线自然汇聚，这不是规划的结果，而是海淀历史沉淀的事实。然而迎接这些人才的，是<span class="bold">通勤拥堵的日常、边界分明的园区、缺乏生活品质的城市环境</span>。</p>
+      </div>
+      <div class="card">
+        <div class="card-zh">产业竞争的悖论</div>
+        <div class="card-en">The Industry Paradox</div>
+        <p>海淀的 AI 人才密度超过旧金山硅谷，但<span class="bold">创新成果的转化密度却相反</span>。问题不在于人，在于组织方式。旧金山的秘密从来不是天才的数量，而是<span class="bold">天才之间碰撞的频率</span>——产学研之间的渗透性、跨学科的交流密度、创新在非正式场合自然发生的空间结构。这些才是驱动创新的真正基础设施，而这里恰恰是缺失的。</p>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p>这里拥有世界上最高的 AI 人才密度，如何"<span class="bold" style="color:var(--white);">组织高密度人才实现持续有效的创新和转化</span>"是城市形态与产业组织方式都需要思考和解决的现实挑战，当然，更是这个时代给予海淀的向新人类文明进化探索的绝佳机遇。</p>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">02</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 3 · STRATEGY 1: AI-FIRST CITY ─── -->
+<div class="sw" id="s3">
+  <div class="slide">
+    <div class="wm">01</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略一 · AI-First City</span>
+    </div>
+    <div class="h-zh">全球 AI 城市样板</div>
+    <div class="h-en">Global AI City Prototype — China's Answer to Urban Form in the Age of AI</div>
+    <div class="sep"></div>
+
+    <div class="strat-wrap">
+      <div class="strat-left">
+        <div class="strat-tag">全球 AI 城市样板</div>
+        <div class="strat-tag-en">AI 时代城市形态的中国答案</div>
+        <div class="strat-zh">AI-First City</div>
+        <div class="strat-en">Global AI City Prototype<br>China's Answer to Urban Form<br>in the Age of AI</div>
+        <div class="strat-lead">人类每一次大规模聚集形态的变迁，都与生产资料和生产方式的转移息息相关。</div>
+      </div>
+      <div class="strat-right">
+        <p><span class="bold">智能时代的核心生产资料是信任关系。</span>AI 时代的生产方式是社群化、即时化、高密度知识交换的，现有城市空间的组织逻辑还停留在工业时代——为通勤和工厂而设计，无法成为这种工作方式的最合适的空间载体。</p>
+        <p>AI-First City 的命题，<span class="bold">不是在城市里叠加 AI 技术，而是用 AI 时代的逻辑重新组织城市本身</span>：从居住方式、教育形态，到文化生活的组织逻辑，再到城市空间的整体形制，都需要重新定义。信任只在真实关系中生长，意义只在共同体中被确认，判断力只在真实摩擦中被锻造。当 AI 开始接管效率工作，人类终于可以把"如何共同生活得有意义"作为城市设计的第一命题。</p>
+        <p>这一命题也将助力海淀成为<span class="gold">全球 AI 城市转型的参照系和朝圣地</span>。</p>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">03</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 4 · STRATEGY 2: AI + EVERY INDUSTRY ─── -->
+<div class="sw" id="s4">
+  <div class="slide">
+    <div class="wm">02</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略二 · AI + Every Industry</span>
+    </div>
+    <div class="h-zh">全球 AI 产业高地</div>
+    <div class="h-en">Global AI Industry Hub — China's Answer to Industrial Organization in the Age of AI</div>
+    <div class="sep"></div>
+
+    <div class="strat-wrap">
+      <div class="strat-left">
+        <div class="strat-tag">全球 AI 产业高地</div>
+        <div class="strat-tag-en">AI 时代产业组织方式的中国答案</div>
+        <div class="strat-zh">AI + Every Industry</div>
+        <div class="strat-en">Global AI Industry Hub<br>China's Answer to Industrial<br>Organization in the Age of AI</div>
+        <div class="strat-lead">产业高地不是人才的简单聚集，而是让人才有效创新的系统。</div>
+      </div>
+      <div class="strat-right">
+        <p>海淀的问题从来不是人才不够多，而是<span class="bold">人才密度没有转化为创新密度</span>——产学研之间的组织边界阻隔了信任的流动，缺少让真实信任自然生长的非正式空间，资本与技术之间缺乏足够深度的对话渠道和信任关系。</p>
+        <p>"怎么组织高密度人才实现有效创新"这个问题的真正难点不在于知道该做什么，而在于：政府主导的组织逻辑，和创新所需要的开放与自发性，存在内在的张力。海淀真正的设计挑战是：如何让政府做它擅长的事（基础设施、资本、保护），<span class="gold">用国家能力做硅谷做不到的事</span>；同时真正放开它不擅长的事（知识流动、跨界混合、组织自发性）。</p>
+        <p>打破校区园区边界，让产学研在日常空间中自然渗透；优化空间密度和供给，创造更高频率的有效碰撞；建立真正的第三空间，让非正式的交流成为创新发生的日常条件。AI 渗透每一个行业的产业演化，<span class="bold">垂直整合的研发—产品—应用—数据回路</span>，需要一个能够高效支撑这种演化的产业空间载体。这一命题也将助力海淀成为<span class="bold">全球 AI 产业聚集和组织的壁垒和高地</span>。</p>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">04</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 5 · CLOSING ─── -->
+<div class="sw" id="s5">
+  <div class="slide closing">
+
+    <div class="closing-eyebrow">四 · Conclusion · 海淀的使命</div>
+    <div class="closing-headline-zh">海淀，创造 AI 时代的新文明</div>
+    <div class="closing-headline-en">Haidian — Building a New Civilization for the Age of Artificial Intelligence</div>
+
+    <div class="closing-pillars">
+      <div class="closing-pillar">
+        <div class="pillar-strategy">AI-First City</div>
+        <div class="pillar-zh">全球 AI 城市样板</div>
+        <div class="pillar-en">Global AI City Prototype</div>
+      </div>
+      <div class="closing-pillar">
+        <div class="pillar-strategy">AI + Every Industry</div>
+        <div class="pillar-zh">全球 AI 产业高地</div>
+        <div class="pillar-en">Global AI Industry Hub</div>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">05</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<script>
+const slides = document.querySelectorAll('.sw');
+const dots   = document.querySelectorAll('.dot');
+const deck   = document.getElementById('deck');
+
+function go(i) { slides[i].scrollIntoView({ behavior: 'smooth' }); }
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = [...slides].indexOf(e.target);
+      dots.forEach((d, j) => d.classList.toggle('on', i === j));
+    }
+  });
+}, { threshold: 0.5, root: deck });
+
+slides.forEach(s => obs.observe(s));
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  const cur = [...slides].findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top >= -deck.scrollTop && r.top < window.innerHeight / 2;
+  });
+  let active = 0;
+  dots.forEach((d, i) => { if (d.classList.contains('on')) active = i; });
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') go(Math.min(active + 1, slides.length - 1));
+  if (e.key === 'ArrowUp'   || e.key === 'PageUp')   go(Math.max(active - 1, 0));
+});
+</script>
+</body>
+</html>
