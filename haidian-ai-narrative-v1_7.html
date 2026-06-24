@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百年京张 AI 创新带 · 总体故事线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:  #091520;
+  --navy2: #0d1b2a;
+  --gold:  #F5C842;
+  --gold2: #FFD966;
+  --teal:  #7DC0BD;
+  --body:  #BEC9D2;
+  --dim:   #7AABBF;
+  --white: #EDF1F4;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: #040d14;
+  color: var(--body);
+}
+
+/* ─── SCROLL DECK ─── */
+.deck {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.deck::-webkit-scrollbar { display: none; }
+
+/* ─── NAV DOTS ─── */
+.nav {
+  position: fixed;
+  right: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 300;
+}
+.dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(122,171,191,0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dot.on {
+  background: var(--gold);
+  transform: scale(1.8);
+}
+
+/* ─── SLIDE WRAPPER ─── */
+.sw {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  background: var(--navy);
+}
+/* all slides share --navy background */
+
+/* ─── THE 16:9 SLIDE ─── */
+.slide {
+  /* True 16:9: limited by whichever viewport dimension is the constraint */
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.2vw 5.8vw 5vw;
+}
+
+/* Subtle slide frame */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(107,158,155,0.07);
+  pointer-events: none;
+}
+
+/* Decorative corner marks */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2.5vw; height: 2.5vw;
+  border-top: 1px solid rgba(245,200,66,0.15);
+  border-left: 1px solid rgba(245,200,66,0.15);
+}
+
+/* ─── FOOTER BAR ─── */
+.foot-bar {
+  position: absolute;
+  bottom: 1.8vw;
+  left: 5.8vw;
+  right: 5.8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(107,158,155,0.12);
+  padding-top: 0.7vw;
+}
+.foot-label {
+  font-size: 0.48vw;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(122,171,191,0.4);
+}
+.foot-pg {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.7vw;
+  color: rgba(245,200,66,0.25);
+}
+
+/* ─── COVER ─── */
+.slide.cover {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 4vw 5.8vw;
+}
+
+.cover-label {
+  font-size: 0.52vw;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 2vw;
+}
+
+.cover-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.6vw;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.07;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6vw;
+}
+
+.cover-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05vw;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  margin-bottom: 2.8vw;
+}
+
+.cover-body {
+  font-size: 0.88vw;
+  line-height: 2.1;
+  color: var(--dim);
+  letter-spacing: 0.01em;
+}
+
+/* ─── SECTION LABELS ─── */
+.srow {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2vw;
+  margin-bottom: 0.5vw;
+}
+.snum {
+  font-size: 0.55vw;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.snum-zh {
+  font-size: 0.52vw;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+}
+
+.h-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.55vw;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.18;
+  margin-bottom: 0.18vw;
+}
+.h-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85vw;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.07em;
+  margin-bottom: 1.4vw;
+}
+
+.sep {
+  width: 2rem;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.3;
+  margin-bottom: 1.4vw;
+}
+
+/* ─── BODY TEXT ─── */
+p {
+  font-size: 0.88vw;
+  line-height: 1.92;
+  color: var(--body);
+  font-weight: 300;
+  margin-bottom: 0.7vw;
+  letter-spacing: 0.01em;
+}
+p:last-child { margin-bottom: 0; }
+
+.bold  { font-weight: 600; color: var(--white); }
+.gold  { color: var(--gold2); font-weight: 600; }
+.muted { color: var(--dim); }
+
+/* ─── QUESTION CALLOUT (Slide 1) ─── */
+.question {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.85vw;
+  color: var(--gold2);
+  font-weight: 600;
+  line-height: 1.38;
+  margin: 1vw 0 0.15vw;
+}
+.question-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.75vw;
+  color: var(--teal);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6vw;
+}
+.answer {
+  font-size: 0.9vw;
+  color: var(--gold2);
+  font-weight: 400;
+  line-height: 1.9;
+  margin-bottom: 0.5vw;
+  opacity: 0.9;
+}
+.coda {
+  font-size: 0.78vw;
+  color: var(--dim);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* ─── TWO PARADOXES (Slide 2) ─── */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3vw;
+  margin-top: 0.2vw;
+}
+.card {
+  border-top: 1px solid rgba(107,158,155,0.3);
+  padding-top: 0.9vw;
+}
+.card-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05vw;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.1vw;
+}
+.card-en {
+  font-size: 0.5vw;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 0.65vw;
+}
+.card p { font-size: 0.83vw; line-height: 1.86; }
+
+.insight {
+  border-top: 1px solid rgba(107,158,155,0.12);
+  padding-top: 0.9vw;
+  margin-top: 1.1vw;
+}
+.insight p { font-size: 0.83vw; line-height: 1.88; }
+
+/* ─── STRATEGY SLIDES (3 & 4) ─── */
+.strat-wrap {
+  display: grid;
+  grid-template-columns: 36% 1fr;
+  gap: 4vw;
+  align-items: start;
+  margin-top: 0.2vw;
+}
+
+.strat-left {
+  border-top: 1px solid rgba(107,158,155,0.25);
+  padding-top: 1vw;
+}
+
+.strat-tag {
+  font-size: 0.52vw;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.3vw;
+}
+.strat-tag-en {
+  font-size: 0.48vw;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  margin-bottom: 0.85vw;
+}
+.strat-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5vw;
+  font-weight: 600;
+  color: var(--gold2);
+  line-height: 1.3;
+  margin-bottom: 0.2vw;
+}
+.strat-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.68vw;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  margin-bottom: 1.2vw;
+}
+.strat-lead {
+  font-size: 0.82vw;
+  color: var(--dim);
+  line-height: 1.85;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.strat-right {
+  border-top: 1px solid rgba(107,158,155,0.1);
+  padding-top: 1vw;
+}
+.strat-right p { font-size: 0.83vw; line-height: 1.88; }
+
+/* ─── CLOSING SLIDE ─── */
+.slide.closing {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.closing-eyebrow {
+  font-size: 0.52vw;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.8vw;
+}
+
+.closing-headline-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.6vw;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.45vw;
+}
+
+.closing-headline-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05vw;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  margin-bottom: 3.2vw;
+}
+
+.closing-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 68%;
+  margin: 0 auto;
+}
+
+.closing-pillar {
+  padding: 1.5vw 2.2vw;
+  border-top: 1px solid rgba(107,158,155,0.3);
+}
+
+.closing-pillar:first-child {
+  border-right: 1px solid rgba(107,158,155,0.15);
+}
+
+.pillar-strategy {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3vw;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.3vw;
+}
+
+.pillar-zh {
+  font-size: 0.78vw;
+  font-weight: 500;
+  color: var(--body);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2vw;
+}
+
+.pillar-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.68vw;
+  font-weight: 300;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+}
+
+.wm {
+  position: absolute;
+  right: 4vw;
+  bottom: 3.5vw;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12vw;
+  font-weight: 300;
+  color: rgba(245,200,66,0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── PROTOTYPE COMPARISON SLIDE ─── */
+.proto-slide { padding-top: 2.4vw; padding-bottom: 3vw; }
+.proto-thesis {
+  font-size: 0.8vw; line-height: 1.72; color: var(--body);
+  font-weight: 300; margin-bottom: 0.85vw; max-width: 95%;
+}
+.proto-compare {
+  display: grid; grid-template-columns: 0.82fr 1.06fr auto 1.06fr 0.82fr;
+  align-items: center; gap: 1.1vw; margin-bottom: 0;
+}
+.proto-side {
+  align-self: center;
+  font-size: 0.76vw; line-height: 1.92; color: var(--body); font-weight: 300;
+  padding-top: 0.7vw; border-top: 1px solid rgba(107,158,155,0.28);
+}
+.proto-side--ai { border-top-color: rgba(245,200,66,0.5); }
+.proto-side p { font-size: 0.76vw; line-height: 1.92; margin: 0; }
+.proto-card {
+  background: transparent; border: none; padding: 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.proto-cap { text-align: center; margin-bottom: 0.2vw; }
+.proto-cap-zh {
+  display: block; font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 600; font-size: 1.2vw; color: var(--white); line-height: 1.1;
+}
+.proto-card--ai .proto-cap-zh { color: var(--gold2); }
+.proto-cap-en {
+  display: block; font-size: 0.46vw; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--dim); margin-top: 0.28vw;
+}
+.proto-svg { width: 100%; display: flex; justify-content: center; }
+.proto-svg svg {
+  width: 100%; max-width: 22.5vw; height: auto;
+  transform-origin: center center;
+  animation: protoBreathe 9s ease-in-out infinite;
+}
+.proto-card--ai .proto-svg svg { animation-duration: 11s; }
+@keyframes protoBreathe {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.014); }
+}
+.proto-leg {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.3vw 0.45vw; margin-top: 0.35vw;
+}
+.pchip {
+  font-size: 0.48vw; font-weight: 500; color: var(--body);
+  padding: 0.1vw 0.5vw 0.1vw 1.05vw; border-radius: 1vw;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--c);
+  position: relative;
+}
+.pchip::before {
+  content:''; position:absolute; left:0.4vw; top:50%; transform:translateY(-50%);
+  width:0.4vw; height:0.4vw; border-radius:50%; background:var(--c);
+}
+.pchip--new {
+  background: #c02870; color:#fff; font-weight:600; border-color:#e0509a;
+  box-shadow: 0 0 0 rgba(224,56,128,0.5); animation: pchipPulse 2.8s ease-in-out infinite;
+}
+.pchip--new::before { background:#fff; }
+@keyframes pchipPulse {
+  0%,100% { box-shadow: 0 0 0px rgba(224,56,128,0); }
+  50%     { box-shadow: 0 0 9px rgba(224,56,128,0.55); }
+}
+.proto-axis {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 0.5vw; padding: 0 0.1vw;
+}
+.proto-axis-line { flex: 1; width: 1px; background: linear-gradient(var(--teal), rgba(122,171,191,0)); opacity:0.4; min-height:1.4vw; }
+.proto-axis-mark {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.7vw; color: var(--gold);
+  line-height: 1; animation: axisDrift 3.5s ease-in-out infinite;
+}
+@keyframes axisDrift {
+  0%,100% { transform: translateX(-2px); opacity:.6; }
+  50%     { transform: translateX(2px);  opacity:1; }
+}
+.proto-axis-cap { font-size: 0.5vw; letter-spacing: 0.12em; color: var(--teal); text-align: center; line-height: 1.35; }
+.proto-seventh {
+  display: flex; align-items: baseline; gap: 1vw;
+  border-top: 1px solid rgba(224,56,128,0.35); padding-top: 0.65vw;
+}
+.proto-seventh-tag {
+  flex-shrink: 0; font-size: 0.55vw; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #e85a96;
+}
+.proto-seventh-body { font-size: 0.72vw; line-height: 1.65; color: var(--body); font-weight: 300; }
+
+/* ─── DECK-WIDE ENTRANCE MOTION ─── */
+.sw .slide {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .85s cubic-bezier(.22,.61,.36,1), transform .85s cubic-bezier(.22,.61,.36,1);
+}
+.sw.in .slide { opacity: 1; transform: none; }
+
+/* staged reveal inside the prototype slide */
+.proto-compare > * {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.sw.in .proto-compare > *:nth-child(1) { opacity:1; transform:none; transition-delay:.20s; }
+.sw.in .proto-compare > *:nth-child(2) { opacity:1; transform:none; transition-delay:.32s; }
+.sw.in .proto-compare > *:nth-child(3) { opacity:1; transform:none; transition-delay:.42s; }
+.sw.in .proto-compare > *:nth-child(4) { opacity:1; transform:none; transition-delay:.52s; }
+.sw.in .proto-compare > *:nth-child(5) { opacity:1; transform:none; transition-delay:.64s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-svg svg, .pchip--new, .proto-axis-mark { animation: none; }
+  .sw .slide, .proto-compare > * { transition: none; opacity:1; transform:none; }
+}
+
+
+/* ─── FOUR-ERA PROGRESSION SLIDE ─── */
+.era-slide { padding-top: 3vw; }
+.era-lead {
+  font-size: 0.8vw; line-height: 1.72; color: var(--body);
+  font-weight: 300; margin-bottom: 1.1vw; max-width: 96%;
+}
+.era-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: stretch; gap: 0.6vw; margin-bottom: 1.1vw;
+}
+.era-col {
+  border-top: 1px solid rgba(107,158,155,0.28);
+  padding-top: 0.8vw;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.era-col--ai { border-top-color: rgba(245,200,66,0.6); }
+.era-head { margin-bottom: 0.55vw; }
+.era-name {
+  display: block; font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 600; font-size: 1.15vw; color: var(--white); line-height: 1.1;
+}
+.era-col--ai .era-name { color: var(--gold2); }
+.era-name-en {
+  display: block; font-size: 0.44vw; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--dim); margin-top: 0.22vw;
+}
+.era-glyph { color: var(--teal); margin: 0.3vw 0 0.6vw; }
+.era-glyph svg { height: 3.4vw; width: auto; display: block; }
+.era-col--ai .era-glyph { color: var(--gold); }
+.era-col--ai .era-glyph svg { animation: eraNet 6s ease-in-out infinite; transform-origin: center; }
+@keyframes eraNet { 0%,100%{ transform: scale(1); opacity:.92;} 50%{ transform: scale(1.05); opacity:1;} }
+.era-form {
+  font-size: 0.82vw; font-weight: 600; color: var(--white); letter-spacing: 0.02em;
+  line-height: 1.2; margin-bottom: 0.15vw;
+}
+.era-col--ai .era-form { color: var(--gold2); }
+.era-form-en {
+  font-size: 0.56vw; color: var(--dim); font-weight: 300; line-height: 1.4;
+  margin-bottom: 0.7vw; min-height: 1.6vw;
+}
+.era-rows { width: 100%; border-top: 1px solid rgba(107,158,155,0.12); padding-top: 0.5vw; }
+.era-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 0.4vw; padding: 0.18vw 0;
+}
+.era-k {
+  font-size: 0.46vw; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--dim); white-space: nowrap;
+}
+.era-v { font-size: 0.68vw; font-weight: 500; color: var(--body); text-align: right; }
+.era-row--anchor .era-k { color: var(--teal); }
+.era-row--anchor .era-v { color: var(--teal); font-weight: 600; }
+.era-col--ai .era-row--anchor .era-k,
+.era-col--ai .era-row--anchor .era-v { color: var(--gold2); }
+
+.era-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.4vw; color: var(--teal);
+  opacity: 0.5; padding-top: 2.4vw;
+}
+.era-arrow--ai { color: var(--gold); opacity: 0.85; animation: axisDrift 3.5s ease-in-out infinite; }
+
+.era-punch {
+  display: flex; align-items: baseline; gap: 1vw;
+  border-top: 1px solid rgba(245,200,66,0.4); padding-top: 0.7vw;
+}
+.era-punch-tag {
+  flex-shrink: 0; font-size: 0.55vw; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+}
+.era-punch-body { font-size: 0.74vw; line-height: 1.68; color: var(--body); font-weight: 300; }
+
+/* staged reveal */
+.era-lead, .era-col, .era-arrow, .era-punch {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.sw.in .era-lead { opacity:1; transform:none; transition-delay:.12s; }
+.sw.in .era-flow > *:nth-child(1) { opacity:1; transform:none; transition-delay:.26s; }
+.sw.in .era-flow > *:nth-child(2) { opacity:1; transform:none; transition-delay:.34s; }
+.sw.in .era-flow > *:nth-child(3) { opacity:1; transform:none; transition-delay:.42s; }
+.sw.in .era-flow > *:nth-child(4) { opacity:1; transform:none; transition-delay:.50s; }
+.sw.in .era-flow > *:nth-child(5) { opacity:1; transform:none; transition-delay:.58s; }
+.sw.in .era-flow > *:nth-child(6) { opacity:1; transform:none; transition-delay:.66s; }
+.sw.in .era-flow > *:nth-child(7) { opacity:1; transform:none; transition-delay:.74s; }
+.sw.in .era-punch { opacity:1; transform:none; transition-delay:.9s; }
+@media (prefers-reduced-motion: reduce) {
+  .era-col--ai .era-glyph svg, .era-arrow--ai { animation: none; }
+  .era-lead, .era-col, .era-arrow, .era-punch { transition: none; opacity:1; transform:none; }
+}
+
+
+/* ─── JUDGMENT SLIDES (shared) ─── */
+.judge-slide, .sf-slide { padding-top: 2.6vw; padding-bottom: 3vw; }
+.judge-lead, .sf-lead {
+  font-size: 0.78vw; line-height: 1.74; color: var(--body);
+  font-weight: 300; margin-bottom: 1vw; max-width: 96%;
+}
+.judge-foot {
+  display: flex; align-items: baseline; gap: 1.2vw; flex-wrap: wrap;
+  border-top: 1px solid rgba(245,200,66,0.35); padding-top: 0.6vw; margin-top: 0.9vw;
+}
+.judge-src { flex-shrink: 0; font-size: 0.5vw; letter-spacing: 0.06em; color: var(--dim); }
+.judge-punch { font-size: 0.74vw; line-height: 1.6; color: var(--body); font-weight: 300; }
+
+/* charts row */
+.judge-charts { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 2.4vw; align-items: center; }
+.chart-card { display: flex; flex-direction: column; }
+.chart-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+  font-size: 1.05vw; color: var(--gold2); margin-bottom: 0.7vw;
+  display: flex; align-items: baseline; gap: 0.6vw;
+}
+.chart-sub { font-family:'Inter',sans-serif; font-style:normal; font-weight:400;
+  font-size: 0.46vw; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+
+/* donut */
+.donut-wrap { position: relative; width: 13vw; height: 13vw; margin: 0 auto 0.6vw; }
+.donut-svg { width: 100%; height: 100%; transform: rotate(0deg); }
+.donut-center {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; pointer-events: none;
+}
+.donut-val { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+  font-size: 1.9vw; color: var(--white); line-height: 1; }
+.donut-lab { font-size: 0.58vw; color: var(--dim); margin-top: 0.25vw; letter-spacing: 0.04em; }
+.donut-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3vw 0.9vw; }
+.dleg { font-size: 0.56vw; color: var(--body); display: inline-flex; align-items: center; gap: 0.32vw; }
+.dleg i { width: 0.5vw; height: 0.5vw; border-radius: 50%; display: inline-block; }
+
+/* region list */
+.region-list { display: flex; flex-direction: column; gap: 0.62vw; }
+.region-row { border-left: 2px solid var(--rc); padding-left: 0.7vw; transition: transform .25s ease; }
+.region-row:hover { transform: translateX(3px); }
+.region-head { display: flex; align-items: baseline; gap: 0.5vw; }
+.region-name { font-size: 0.82vw; font-weight: 600; color: var(--white); }
+.region-pct { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.92vw; color: var(--rc); font-weight:600; }
+.region-bar { height: 0.4vw; background: rgba(255,255,255,0.06); border-radius: 1vw; margin: 0.28vw 0; overflow: hidden; }
+.region-bar span { display:block; height:100%; width:0; background: var(--rc); border-radius:1vw;
+  transition: width 1.1s cubic-bezier(.22,.61,.36,1); }
+.sw.in .region-bar span { width: var(--bar); }
+.region-insts { font-size: 0.54vw; color: var(--dim); line-height: 1.5; }
+
+/* ─── SF MAP SLIDE ─── */
+.sf-body { display: grid; grid-template-columns: 1.18fr 0.82fr; gap: 1.8vw; align-items: start; }
+.sf-map-card { display: flex; flex-direction: column; }
+.sf-map { width: 100%; height: auto; border-radius: 0.6vw; }
+.sf-water-lbl { font-size: 8px; fill: #5e8e98; letter-spacing: .08em; font-family: var(--font-sans,sans-serif); }
+.sf-zone { stroke-width: 1; transition: opacity .25s; }
+.sf-zone--work { fill: rgba(245,200,66,0.10); stroke: rgba(245,200,66,0.45); }
+.sf-zone--social { fill: rgba(144,112,224,0.14); stroke: rgba(144,112,224,0.5); }
+.sf-map-card:hover .sf-zone--work { fill: rgba(245,200,66,0.16); }
+.sf-nbhd { font-size: 8px; fill: var(--body); font-family: var(--font-sans,sans-serif); text-anchor: middle; }
+.sf-nbhd--key { fill: var(--gold2); font-weight: 600; font-size: 9px; }
+.sf-nbhd--social { fill: #b9a6ee; font-weight: 600; }
+.sf-nbhd--faint { fill: #5a6470; }
+.sf-dots circle { fill: var(--teal); opacity: .85; }
+.sf-anchor { fill: #e85a96; stroke: #fff; stroke-width: 1.5; }
+.sf-anchor--o { fill: var(--gold); }
+.sf-anchor-lbl { font-size: 7.5px; fill: var(--white); text-anchor: middle; font-family: var(--font-sans,sans-serif); }
+.sf-southbay rect { fill: rgba(255,255,255,0.03); stroke: rgba(122,134,150,0.4); stroke-width: 1; }
+.sf-sb-title { font-size: 9px; fill: #8a96a4; font-weight: 600; font-family: var(--font-sans,sans-serif); }
+.sf-sb-sub { font-size: 7px; fill: #66707c; font-family: var(--font-sans,sans-serif); letter-spacing:.06em; }
+.sf-sb-chip { font-size: 7.5px; fill: #7e8a98; font-family: var(--font-sans,sans-serif); }
+.sf-shift-lbl { font-size: 8px; fill: var(--gold); font-style: italic; font-family: 'Cormorant Garamond',serif; }
+.sf-maplegend { display: flex; flex-wrap: wrap; gap: 0.3vw 1vw; margin-top: 0.5vw; }
+.sfk { font-size: 0.5vw; color: var(--body); display: inline-flex; align-items: center; gap: 0.32vw; }
+.sfk--faint { color: var(--dim); }
+.sfk-dot { width: 0.45vw; height: 0.45vw; border-radius: 50%; background: var(--teal); display: inline-block; }
+.sfk-dot--work { background: var(--gold); }
+.sfk-dot--social { background: #9070e0; }
+.sfk-dot--faint { background: #7a8696; }
+
+.sf-notes { display: flex; flex-direction: column; gap: 0.6vw; }
+.sf-note { border-top: 1px solid rgba(107,158,155,0.18); padding-top: 0.4vw; }
+.sf-note-h { font-size: 0.66vw; font-weight: 600; color: var(--gold2); margin-bottom: 0.15vw; letter-spacing: 0.02em; }
+.sf-note p { font-size: 0.62vw; line-height: 1.55; color: var(--body); font-weight: 300; margin: 0; }
+.sf-chips { display: flex; flex-wrap: wrap; gap: 0.35vw; margin-top: 0.3vw; }
+.sf-chip {
+  font-size: 0.54vw; color: var(--white); background: rgba(245,200,66,0.08);
+  border: 1px solid rgba(245,200,66,0.3); border-radius: 1vw; padding: 0.16vw 0.6vw;
+}
+
+/* entrance reveal */
+.judge-lead, .judge-charts, .sf-lead, .sf-body, .judge-foot {
+  opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s ease;
+}
+.sw.in .judge-lead   { opacity:1; transform:none; transition-delay:.14s; }
+.sw.in .judge-charts { opacity:1; transform:none; transition-delay:.30s; }
+.sw.in .sf-lead      { opacity:1; transform:none; transition-delay:.14s; }
+.sw.in .sf-body      { opacity:1; transform:none; transition-delay:.30s; }
+.sw.in .judge-foot   { opacity:1; transform:none; transition-delay:.5s; }
+@media (prefers-reduced-motion: reduce) {
+  .judge-lead,.judge-charts,.sf-lead,.sf-body,.judge-foot { transition:none; opacity:1; transform:none; }
+  .region-bar span { transition: none; width: var(--bar); }
+}
+
+
+/* ─── SF SLIDE · SPLIT (map left / text right) ─── */
+.sf-slide { padding-top: 2vw; padding-bottom: 2.4vw; }
+.sf-body--split {
+  display: grid; grid-template-columns: 1.04fr 1fr; gap: 2.2vw;
+  align-items: center; margin-top: 0.4vw;
+}
+.sf-body--split .sf-map { max-width: 33vw; margin: 0 auto; display: block; }
+.sf-textcol { display: flex; flex-direction: column; gap: 0.7vw; align-self: center; }
+.sf-textcol .sf-lead {
+  font-size: 0.74vw; line-height: 1.7; color: var(--body); font-weight: 300;
+  margin: 0 0 0.2vw; max-width: 100%;
+}
+.sf-textcol .sf-note { border-top: 1px solid rgba(107,158,155,0.18); padding-top: 0.4vw; }
+.sf-textcol .sf-note-h { font-size: 0.64vw; }
+.sf-textcol .sf-note p { font-size: 0.6vw; line-height: 1.5; }
+.sf-srcpunch {
+  display: flex; flex-direction: column; gap: 0.3vw;
+  border-top: 1px solid rgba(245,200,66,0.35); padding-top: 0.55vw; margin-top: 0.15vw;
+}
+.sf-srcpunch .judge-punch { font-size: 0.72vw; line-height: 1.6; }
+.sf-srcpunch .judge-src { font-size: 0.5vw; color: var(--dim); letter-spacing: 0.05em; }
+.sf-body--split .sf-maplegend { justify-content: center; }
+/* split reveal */
+.sf-body--split { opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s ease; }
+.sw.in .sf-body--split { opacity: 1; transform: none; transition-delay: .22s; }
+@media (prefers-reduced-motion: reduce){ .sf-body--split{ transition:none; opacity:1; transform:none; } }
+
+
+/* ─── JUDGMENT 3 · ECONOMICS SLIDE ─── */
+.econ-slide { padding-top: 2.2vw; padding-bottom: 2.4vw; }
+.econ-body { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2.2vw; align-items: start; margin-top: 0.3vw; }
+
+/* value-chain stack */
+.stack-card { display: flex; flex-direction: column; }
+.stack-cap {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+  font-size: 1.0vw; color: var(--gold2); margin-bottom: 0.55vw;
+  display: flex; align-items: baseline; gap: 0.5vw;
+}
+.stack-cap-en { font-family:'Inter',sans-serif; font-style:normal; font-size: 0.44vw;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+.stack { display: flex; flex-direction: column; gap: 0.5vw; }
+.stack-group { position: relative; padding-left: 1.3vw; }
+.stack-group--up   { border-left: 2px solid rgba(90,140,210,0.5); }
+.stack-group--down { border-left: 2px solid rgba(245,200,66,0.6); }
+.stack-side-tag {
+  position: absolute; left: 0; top: 0; transform-origin: left top;
+  transform: rotate(-90deg) translateX(-100%);
+  font-size: 0.44vw; letter-spacing: 0.1em; color: #6f9ad8; white-space: nowrap;
+}
+.stack-side-tag--gold { color: var(--gold); }
+.stack-rows { display: flex; flex-direction: column; gap: 0.28vw; }
+.layer {
+  display: flex; align-items: center; gap: 0.55vw;
+  background: rgba(90,140,210,0.07); border: 1px solid rgba(90,140,210,0.18);
+  border-radius: 0.4vw; padding: 0.28vw 0.55vw; transition: transform .2s, background .2s;
+}
+.layer:hover { transform: translateX(3px); background: rgba(90,140,210,0.13); }
+.layer--down { background: rgba(245,200,66,0.07); border-color: rgba(245,200,66,0.28); }
+.layer--down:hover { background: rgba(245,200,66,0.13); }
+.layer-no { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.78vw; color: var(--dim); width: 1.1vw; text-align:center; flex-shrink:0; }
+.layer-ic { font-size: 0.8vw; width: 1vw; text-align:center; flex-shrink:0; }
+.layer-tx { display: flex; flex-direction: column; line-height: 1.1; flex: 1; }
+.layer-tx b { font-size: 0.7vw; font-weight: 600; color: var(--white); }
+.layer-tx i { font-size: 0.44vw; font-style: normal; letter-spacing: 0.06em; color: var(--dim); text-transform: uppercase; }
+.side { font-size: 0.56vw; font-weight: 600; border-radius: 1vw; padding: 0.06vw 0.5vw; flex-shrink:0; }
+.side--us { background: rgba(58,111,216,0.22); color: #8ab4f4; border: 1px solid #3a6fd8; }
+.side--cn { background: rgba(210,75,62,0.22); color: #f0978c; border: 1px solid #d24b3e; }
+.side--both { background: rgba(255,255,255,0.06); color: var(--body); border: 1px solid #9aa6b4; }
+
+/* right argument */
+.econ-text { display: flex; flex-direction: column; gap: 0.7vw; }
+.econ-lead { font-size: 0.76vw; line-height: 1.7; color: var(--body); font-weight: 300; margin: 0; }
+.econ-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6vw; }
+.stat { border-top: 1px solid rgba(107,158,155,0.3); padding-top: 0.4vw; }
+.stat--warn { border-top-color: rgba(240,120,80,0.55); }
+.stat-v { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; font-size: 1.5vw; color: var(--gold2); line-height: 1; }
+.stat--warn .stat-v { color: #f0936a; }
+.stat-k { font-size: 0.5vw; color: var(--dim); margin-top: 0.25vw; line-height: 1.35; }
+.econ-gap { font-size: 0.64vw; line-height: 1.55; color: var(--body); font-weight: 300;
+  border-left: 2px solid #f0936a; padding-left: 0.7vw; }
+.econ-p { font-size: 0.72vw; line-height: 1.66; color: var(--body); font-weight: 300; margin: 0; }
+.econ-concl {
+  display: flex; flex-direction: column; gap: 0.25vw;
+  border-top: 1px solid rgba(245,200,66,0.45); padding-top: 0.55vw;
+}
+.econ-concl-tag { font-size: 0.52vw; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.econ-concl-body { font-size: 0.78vw; line-height: 1.62; color: var(--body); font-weight: 300; }
+
+/* reveal */
+.econ-body { opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s ease; }
+.sw.in .econ-body { opacity: 1; transform: none; transition-delay: .2s; }
+@media (prefers-reduced-motion: reduce){ .econ-body{ transition:none; opacity:1; transform:none; } }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="dot on" onclick="go(0)"></div>
+  <div class="dot"    onclick="go(1)"></div>
+  <div class="dot"    onclick="go(2)"></div>
+  <div class="dot"    onclick="go(3)"></div>
+  <div class="dot"    onclick="go(4)"></div>
+  <div class="dot"    onclick="go(5)"></div>
+  <div class="dot"    onclick="go(6)"></div>
+  <div class="dot"    onclick="go(7)"></div>
+  <div class="dot"    onclick="go(8)"></div>
+  <div class="dot"    onclick="go(9)"></div>
+  <div class="dot"    onclick="go(10)"></div>
+</nav>
+
+<div class="deck" id="deck">
+
+<!-- ─── 0 · COVER ─── -->
+<div class="sw in" id="s0">
+  <div class="slide cover">
+    <div class="cover-label">总体故事线 · Tekuma · Ver 1.0</div>
+    <div class="cover-zh">百年京张<br>AI 创新带</div>
+    <div class="cover-en">Centennial Jingzhang AI Innovation Corridor · Master Narrative</div>
+    <div class="cover-body">
+      1909年，一条铁路以折返线破解了地形的束缚。<br>
+      百年之后，同一条线上，正在积蓄另一个时代的动能。
+    </div>
+    <div class="foot-bar" style="position:absolute;bottom:1.8vw;left:5.8vw;right:5.8vw;">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">00</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 1 · HISTORICAL ANCHOR ─── -->
+<div class="sw" id="s1">
+  <div class="slide">
+    <div class="srow">
+      <span class="snum">一 · Historical Anchor</span>
+      <span class="snum-zh">历史锚点</span>
+    </div>
+    <div class="h-zh">两次折返线，两次时代命题</div>
+    <div class="h-en">Two Switchbacks, Two Epochal Questions</div>
+    <div class="sep"></div>
+
+    <p>1909年，詹天佑主持修建京张铁路，面对八达岭险峻的陡坡，他没有选择正面硬攻，而是设计了<span class="bold">人字形折返线</span>——让列车借助两段反向坡道积蓄动力、转换方向，化解了近乎不可能的爬坡难题。</p>
+    <p>这是一种东方智慧：<span class="bold">不与障碍正面硬碰，而是通过巧妙的路径设计，让阻力本身转化为动力的一部分。</span></p>
+    <p>百年之后，这条铁路沿线正在面对另一道陡坡。面对中美之间长期的AI战略竞争关系——</p>
+
+    <div class="question">中国在 AI 时代的折返线是什么？</div>
+    <div class="question-en">What is China's switchback in the age of artificial intelligence?</div>
+    <div class="answer">不是推倒重来，而是因势利导，转换路径，让每一道陡坡都成为积蓄动力的弯道。</div>
+    <p class="coda">这是百年京张 AI 创新带城市设计所要回答的核心命题。</p>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">01</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 2 · TWO PARADOXES ─── -->
+<div class="sw" id="s2">
+  <div class="slide">
+    <div class="srow">
+      <span class="snum">二 · Structural Tensions</span>
+      <span class="snum-zh">两个悖论</span>
+    </div>
+    <div class="h-zh">两个悖论，是挑战也是机遇</div>
+    <div class="h-en">Two Paradoxes — Both Challenge and Opportunity</div>
+    <div class="sep"></div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-zh">城市学的悖论</div>
+        <div class="card-en">The Urban Paradox</div>
+        <p>这里已经是<span class="bold">全球 AI 的地理中心</span>。清华、北大、中科院、智谱、字节、百度、小米……全球顶尖 AI 研发力量沿京张铁路沿线自然汇聚，这不是规划的结果，而是海淀历史沉淀的事实。然而迎接这些人才的，是<span class="bold">通勤拥堵的日常、边界分明的园区、缺乏生活品质的城市环境</span>。</p>
+      </div>
+      <div class="card">
+        <div class="card-zh">产业竞争的悖论</div>
+        <div class="card-en">The Industry Paradox</div>
+        <p>海淀的 AI 人才密度超过旧金山硅谷，但<span class="bold">创新成果的转化密度却相反</span>。问题不在于人，在于组织方式。旧金山的秘密从来不是天才的数量，而是<span class="bold">天才之间碰撞的频率</span>——产学研之间的渗透性、跨学科的交流密度、创新在非正式场合自然发生的空间结构。这些才是驱动创新的真正基础设施，而这里恰恰是缺失的。</p>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p>这里拥有世界上最高的 AI 人才密度，如何"<span class="bold" style="color:var(--white);">组织高密度人才实现持续有效的创新和转化</span>"是城市形态与产业组织方式都需要思考和解决的现实挑战，当然，更是这个时代给予海淀的向新人类文明进化探索的绝佳机遇。</p>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">02</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 3 · STRATEGY 1: AI-FIRST CITY ─── -->
+<div class="sw" id="s3">
+  <div class="slide">
+    <div class="wm">01</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略一 · AI-First City</span>
+    </div>
+    <div class="h-zh">全球 AI 城市样板</div>
+    <div class="h-en">Global AI City Prototype — China's Answer to Urban Form in the Age of AI</div>
+    <div class="sep"></div>
+
+    <div class="strat-wrap">
+      <div class="strat-left">
+        <div class="strat-tag">全球 AI 城市样板</div>
+        <div class="strat-tag-en">AI 时代城市形态的中国答案</div>
+        <div class="strat-zh">AI-First City</div>
+        <div class="strat-en">Global AI City Prototype<br>China's Answer to Urban Form<br>in the Age of AI</div>
+        <div class="strat-lead">人类每一次大规模聚集形态的变迁，都与生产资料和生产方式的转移息息相关。</div>
+      </div>
+      <div class="strat-right">
+        <p><span class="bold">智能时代的核心生产资料是信任关系。</span>AI 时代的生产方式是社群化、即时化、高密度知识交换的，现有城市空间的组织逻辑还停留在工业时代——为通勤和工厂而设计，无法成为这种工作方式的最合适的空间载体。</p>
+        <p>AI-First City 的命题，<span class="bold">不是在城市里叠加 AI 技术，而是用 AI 时代的逻辑重新组织城市本身</span>：从居住方式、教育形态，到文化生活的组织逻辑，再到城市空间的整体形制，都需要重新定义。信任只在真实关系中生长，意义只在共同体中被确认，判断力只在真实摩擦中被锻造。当 AI 开始接管效率工作，人类终于可以把"如何共同生活得有意义"作为城市设计的第一命题。</p>
+        <p>这一命题也将助力海淀成为<span class="gold">全球 AI 城市转型的参照系和朝圣地</span>。</p>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">03</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STRATEGY 1 · WHY: FOUR ERAS OF AGGLOMERATION ─── -->
+<div class="sw" id="s3a">
+  <div class="slide era-slide">
+    <div class="wm">01</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略一 · 文明聚集形态 · Why</span>
+    </div>
+    <div class="h-zh">从村庄到社群，聚集的原点在迁移</div>
+    <div class="h-en">How the Means of Production Reshape the Anchor of Human Settlement</div>
+    <div class="sep"></div>
+
+    <div class="era-lead">
+      人类每一次大规模聚集形态的变迁，根子上都是一个政治经济学问题——<span class="bold">生产资料的稀缺与控制方式，决定生产关系，决定人往哪里聚、以什么方式聚。</span>空间是结果，不是原因。农田聚成村庄，机器聚成工厂大院，注意力聚成职住分离的城市；而当 AI 让认知劳动趋于免费、<span class="gold">信任关系成为最稀缺的生产资料</span>，聚集的原点，正从「家」迁向「社群」。
+    </div>
+
+    <div class="era-flow">
+      <!-- 1 农耕 -->
+      <div class="era-col">
+        <div class="era-head"><span class="era-name">农耕时代</span><span class="era-name-en">AGRARIAN</span></div>
+        <div class="era-glyph">
+          <svg viewBox="0 0 84 52" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M10 46 V28 L23 18 L36 28 V46 Z"/>
+            <path d="M40 46 V24 L57 12 L74 24 V46 Z"/>
+            <rect x="52" y="34" width="10" height="12"/>
+          </svg>
+        </div>
+        <div class="era-form">村庄</div>
+        <div class="era-form-en">依附土地的劳动协作单元</div>
+        <div class="era-rows">
+          <div class="era-row"><span class="era-k">生产资料</span><span class="era-v">土地</span></div>
+          <div class="era-row era-row--anchor"><span class="era-k">聚集原点</span><span class="era-v">土地</span></div>
+        </div>
+      </div>
+
+      <div class="era-arrow">→</div>
+
+      <!-- 2 工业 -->
+      <div class="era-col">
+        <div class="era-head"><span class="era-name">工业时代</span><span class="era-name-en">INDUSTRIAL</span></div>
+        <div class="era-glyph">
+          <svg viewBox="0 0 84 52" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M6 46 V26 L18 33 V26 L30 33 V26 L42 33 V46 Z"/>
+            <rect x="14" y="38" width="6" height="8"/>
+            <rect x="28" y="38" width="6" height="8"/>
+            <path d="M36 26 V12 H42 V26"/>
+            <rect x="52" y="22" width="26" height="24"/>
+            <path d="M52 30 H78 M52 38 H78 M61 22 V46 M70 22 V46"/>
+          </svg>
+        </div>
+        <div class="era-form">工厂 + 宿舍大院</div>
+        <div class="era-form-en">维持劳动力供给的再生产装置</div>
+        <div class="era-rows">
+          <div class="era-row"><span class="era-k">生产资料</span><span class="era-v">机器 · 资本</span></div>
+          <div class="era-row era-row--anchor"><span class="era-k">聚集原点</span><span class="era-v">工厂</span></div>
+        </div>
+      </div>
+
+      <div class="era-arrow">→</div>
+
+      <!-- 3 信息 -->
+      <div class="era-col">
+        <div class="era-head"><span class="era-name">信息时代</span><span class="era-name-en">INFORMATION</span></div>
+        <div class="era-glyph">
+          <svg viewBox="0 0 84 52" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="14" y="8" width="22" height="38"/>
+            <path d="M14 18 H36 M14 28 H36 M14 38 H36 M22 8 V46 M29 8 V46"/>
+            <path d="M48 46 V30 L60 22 L72 30 V46 Z"/>
+            <rect x="56" y="36" width="8" height="10"/>
+          </svg>
+        </div>
+        <div class="era-form">写字楼 + 居住区</div>
+        <div class="era-form-en">职住分离 · 以「家」为原点的生活圈</div>
+        <div class="era-rows">
+          <div class="era-row"><span class="era-k">生产资料</span><span class="era-v">注意力 · 平台</span></div>
+          <div class="era-row era-row--anchor"><span class="era-k">聚集原点</span><span class="era-v">家（房子）</span></div>
+        </div>
+      </div>
+
+      <div class="era-arrow era-arrow--ai">→</div>
+
+      <!-- 4 智能 -->
+      <div class="era-col era-col--ai">
+        <div class="era-head"><span class="era-name">智能时代</span><span class="era-name-en">AI-NATIVE</span></div>
+        <div class="era-glyph">
+          <svg viewBox="0 0 84 52" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <line x1="42" y1="26" x2="18" y2="12"/>
+            <line x1="42" y1="26" x2="68" y2="12"/>
+            <line x1="42" y1="26" x2="14" y2="38"/>
+            <line x1="42" y1="26" x2="70" y2="40"/>
+            <line x1="42" y1="26" x2="42" y2="46"/>
+            <circle cx="42" cy="26" r="7" fill="currentColor" stroke="none"/>
+            <circle cx="18" cy="12" r="4"/>
+            <circle cx="68" cy="12" r="4"/>
+            <circle cx="14" cy="38" r="4"/>
+            <circle cx="70" cy="40" r="4"/>
+            <circle cx="42" cy="46" r="4"/>
+          </svg>
+        </div>
+        <div class="era-form">AI 原点社区</div>
+        <div class="era-form-en">以社群为中心的 15 分钟 AI 生活圈</div>
+        <div class="era-rows">
+          <div class="era-row"><span class="era-k">生产资料</span><span class="era-v">信任关系</span></div>
+          <div class="era-row era-row--anchor"><span class="era-k">聚集原点</span><span class="era-v">社群</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="era-punch">
+      <span class="era-punch-tag">智能时代的土地</span>
+      <span class="era-punch-body"><span class="bold">信任关系，是智能时代的土地。</span>当聚集的原点从「家」迁向「社群」，城市空间的组织逻辑必须随之重写——这正是 <span class="gold">15 分钟 AI 社群圈</span> 的起点。</span>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">04</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STRATEGY 1 · PROTOTYPE: 15-MIN AI COMMUNITY CIRCLE ─── -->
+<div class="sw" id="s3b">
+  <div class="slide proto-slide">
+    <div class="wm">01</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略一 · 落地原型 · Prototype</span>
+    </div>
+    <div class="h-zh">从 15 分钟社区生活圈，到 15 分钟 AI 社群圈</div>
+    <div class="h-en">From the 15-Minute Community Life Circle to the 15-Minute AI Community Circle</div>
+    <div class="sep"></div>
+
+
+    <div class="proto-compare">
+      <div class="proto-side proto-side--life">
+        <p>2014 年 10 月，首届世界城市日论坛在上海召开，率先提出<span class="bold">「15 分钟社区生活圈」</span>的基本概念，并在「上海 2035」总体规划中明确为：在市民 15 分钟慢行范围内，完善教育、文化、医疗、养老、休闲及就业创业等服务功能，形成<span class="muted">「宜居、宜业、宜游、宜学、宜养」</span>的社区生活圈。</p>
+      </div>
+
+      <!-- LEFT : Shanghai -->
+      <figure class="proto-card proto-card--life">
+        <figcaption class="proto-cap">
+          <span class="proto-cap-zh">15 分钟社区生活圈</span>
+          <span class="proto-cap-en">SHANGHAI 2035 · 宜居 宜业 宜游 宜学 宜养</span>
+        </figcaption>
+        <div class="proto-svg"><svg viewBox="0 0 520 520" width="100%" style="max-width:480px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="mc"><circle cx="260" cy="260" r="212"/></clipPath>
+    <radialGradient id="g-edu" cx="62%" cy="28%" r="52%">
+      <stop offset="0%" stop-color="#c8e060" stop-opacity=".78"/>
+      <stop offset="100%" stop-color="#c8e060" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-health" cx="28%" cy="32%" r="54%">
+      <stop offset="0%" stop-color="#6ec87a" stop-opacity=".72"/>
+      <stop offset="100%" stop-color="#6ec87a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-sup" cx="24%" cy="54%" r="50%">
+      <stop offset="0%" stop-color="#5ab870" stop-opacity=".68"/>
+      <stop offset="100%" stop-color="#5ab870" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-care" cx="36%" cy="74%" r="52%">
+      <stop offset="0%" stop-color="#f99060" stop-opacity=".72"/>
+      <stop offset="100%" stop-color="#f99060" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-enjoy" cx="66%" cy="70%" r="52%">
+      <stop offset="0%" stop-color="#f8b84a" stop-opacity=".70"/>
+      <stop offset="100%" stop-color="#f8b84a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-admin" cx="82%" cy="50%" r="44%">
+      <stop offset="0%" stop-color="#78c0f0" stop-opacity=".68"/>
+      <stop offset="100%" stop-color="#78c0f0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- BG -->
+  <circle cx="260" cy="260" r="212" fill="#0d1b2a" stroke="rgba(125,192,189,0.18)" stroke-width="0.8"/>
+
+  <!-- Color blobs -->
+  <g clip-path="url(#mc)">
+    <ellipse cx="318" cy="155" rx="160" ry="148" fill="url(#g-edu)"/>
+    <ellipse cx="182" cy="162" rx="148" ry="135" fill="url(#g-health)"/>
+    <ellipse cx="168" cy="260" rx="132" ry="118" fill="url(#g-sup)"/>
+    <ellipse cx="200" cy="368" rx="145" ry="118" fill="url(#g-care)"/>
+    <ellipse cx="340" cy="355" rx="148" ry="122" fill="url(#g-enjoy)"/>
+    <ellipse cx="378" cy="258" rx="122" ry="112" fill="url(#g-admin)"/>
+  </g>
+
+  <!-- Distance rings -->
+  <circle cx="260" cy="260" r="80"  fill="none" stroke="#e07090" stroke-width="0.8" stroke-dasharray="5 4"/>
+  <circle cx="260" cy="260" r="142" fill="none" stroke="#e07090" stroke-width="0.8" stroke-dasharray="5 4"/>
+  <circle cx="260" cy="260" r="212" fill="none" stroke="#e07090" stroke-width="1"   stroke-dasharray="5 4"/>
+
+  <!-- Wedge shading bottom-left -->
+  <path d="M260 260 L95 378 A212 212 0 0 1 88 155 Z" fill="#e86080" fill-opacity=".07"/>
+
+  <!-- Distance text labels along wedge edge -->
+  <text font-size="10.5" fill="#ec85a4" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r5"  startOffset="12%">五分钟</textPath>
+  </text>
+  <text font-size="10.5" fill="#ec85a4" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r10" startOffset="10%">十分钟</textPath>
+  </text>
+  <text font-size="10.5" fill="#ec85a4" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r15" startOffset="8%">十五分钟</textPath>
+  </text>
+  <defs>
+    <path id="r5"  d="M180 330 A80  80  0 0 1 180 192"/>
+    <path id="r10" d="M130 370 A142 142 0 0 1 130 152"/>
+    <path id="r15" d="M78  400 A212 212 0 0 1 78  122"/>
+  </defs>
+
+  <!-- ── FACILITY NODES ── -->
+
+  <!-- 幼儿园 -->
+  <circle cx="285" cy="188" r="29" fill="#c8dc40" stroke="white" stroke-width="2.5"/>
+  <text x="285" y="183" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏫</text>
+  <text x="285" y="202" text-anchor="middle" font-size="9" fill="#3a4e00" font-family="var(--font-sans,sans-serif)" font-weight="500">幼儿园</text>
+
+  <!-- 小学 -->
+  <circle cx="350" cy="150" r="29" fill="#8ac840" stroke="white" stroke-width="2.5"/>
+  <text x="350" y="145" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏫</text>
+  <text x="350" y="164" text-anchor="middle" font-size="9" fill="#1e4000" font-family="var(--font-sans,sans-serif)" font-weight="500">小学</text>
+
+  <!-- 中学 -->
+  <circle cx="390" cy="90" r="29" fill="#58b028" stroke="white" stroke-width="2.5"/>
+  <text x="390" y="85" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏫</text>
+  <text x="390" y="104" text-anchor="middle" font-size="9" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">中学</text>
+
+  <!-- 儿童游乐场 -->
+  <circle cx="338" cy="232" r="26" fill="#fabe50" stroke="white" stroke-width="2.5"/>
+  <text x="338" y="228" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🎠</text>
+  <text x="338" y="243" text-anchor="middle" font-size="8" fill="#5a3600" font-family="var(--font-sans,sans-serif)" font-weight="500">儿童游乐场</text>
+
+  <!-- 社区卫生服务中心 -->
+  <circle cx="152" cy="138" r="29" fill="#50b868" stroke="white" stroke-width="2.5"/>
+  <text x="152" y="133" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏥</text>
+  <text x="152" y="152" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">社区卫生</text>
+
+  <!-- 小型商业 -->
+  <circle cx="176" cy="220" r="27" fill="#50b868" stroke="white" stroke-width="2.5"/>
+  <text x="176" y="215" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🏪</text>
+  <text x="176" y="231" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">小型商业</text>
+
+  <!-- 菜场 -->
+  <circle cx="192" cy="290" r="27" fill="#3a9e50" stroke="white" stroke-width="2.5"/>
+  <text x="192" y="285" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🥦</text>
+  <text x="192" y="301" text-anchor="middle" font-size="8.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">菜场</text>
+
+  <!-- 养老设施 -->
+  <circle cx="224" cy="368" r="29" fill="#f07858" stroke="white" stroke-width="2.5"/>
+  <text x="224" y="363" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏡</text>
+  <text x="224" y="382" text-anchor="middle" font-size="8.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">养老设施</text>
+
+  <!-- 公园 -->
+  <circle cx="312" cy="335" r="27" fill="#f0a838" stroke="white" stroke-width="2.5"/>
+  <text x="312" y="330" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🌳</text>
+  <text x="312" y="346" text-anchor="middle" font-size="8.5" fill="#5a3400" font-family="var(--font-sans,sans-serif)" font-weight="500">公园</text>
+
+  <!-- 社区文化体育 -->
+  <circle cx="378" cy="348" r="29" fill="#e8922a" stroke="white" stroke-width="2.5"/>
+  <text x="378" y="343" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🏋</text>
+  <text x="378" y="357" text-anchor="middle" font-size="7.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">文化设施</text>
+  <text x="378" y="368" text-anchor="middle" font-size="7.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">室内体育</text>
+
+  <!-- 大型超市 -->
+  <circle cx="428" cy="278" r="29" fill="#50a0e0" stroke="white" stroke-width="2.5"/>
+  <text x="428" y="273" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🛒</text>
+  <text x="428" y="292" text-anchor="middle" font-size="8.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">大型超市</text>
+
+  <!-- 社区行政 -->
+  <circle cx="415" cy="180" r="29" fill="#3880c8" stroke="white" stroke-width="2.5"/>
+  <text x="415" y="175" text-anchor="middle" font-size="17" font-family="var(--font-sans,sans-serif)">🏛</text>
+  <text x="415" y="194" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">社区行政</text>
+
+  <!-- ── CENTER ── -->
+  <circle cx="260" cy="260" r="44" fill="#e82858" stroke="white" stroke-width="3.5"/>
+  <text x="260" y="254" text-anchor="middle" font-size="28" font-weight="700" fill="white" font-family="var(--font-sans,sans-serif)">家</text>
+  <text x="260" y="274" text-anchor="middle" font-size="10" fill="white" opacity=".9" font-family="var(--font-sans,sans-serif)">居住空间</text>
+
+  <!-- outer floating labels -->
+  <text x="395" y="52"  text-anchor="middle" font-size="10.5" fill="#a6df72" font-family="var(--font-sans,sans-serif)">中学</text>
+  <text x="82"  y="100" font-size="10"   fill="#84d6a8" font-family="var(--font-sans,sans-serif)">社区卫生服务中心</text>
+  <text x="455" y="175" font-size="10"   fill="#84b8f2" font-family="var(--font-sans,sans-serif)">社区行政设施</text>
+  <text x="462" y="282" font-size="10"   fill="#84b8f2" font-family="var(--font-sans,sans-serif)">大型超市</text>
+  <text x="352" y="398" text-anchor="middle" font-size="9.5" fill="#f0c878" font-family="var(--font-sans,sans-serif)">社区文化设施·室内体育场馆</text>
+  </svg></div>
+        <div class="proto-leg">
+          <span class="pchip" style="--c:#8db830">教育</span>
+          <span class="pchip" style="--c:#5aaae8">工作</span>
+          <span class="pchip" style="--c:#43a857">供给</span>
+          <span class="pchip" style="--c:#f98060">关怀</span>
+          <span class="pchip" style="--c:#f4b030">享受</span>
+          <span class="pchip" style="--c:#e07090">居住</span>
+        </div>
+      </figure>
+
+      <!-- AXIS -->
+      <div class="proto-axis">
+        <div class="proto-axis-line"></div>
+        <div class="proto-axis-mark">→</div>
+        <div class="proto-axis-cap">AI 原生<br>重新定义</div>
+        <div class="proto-axis-line"></div>
+      </div>
+
+      <!-- RIGHT : Haidian -->
+      <figure class="proto-card proto-card--ai">
+        <figcaption class="proto-cap">
+          <span class="proto-cap-zh">15 分钟 AI 社群圈</span>
+          <span class="proto-cap-en">HAIDIAN · 共创 共学 共养 共享 共生</span>
+        </figcaption>
+        <div class="proto-svg"><svg viewBox="0 0 520 520" width="100%" style="max-width:480px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="mc2"><circle cx="260" cy="260" r="212"/></clipPath>
+
+    <!-- Education+: top-right, bright green -->
+    <radialGradient id="a-edu" cx="64%" cy="26%" r="52%">
+      <stop offset="0%" stop-color="#90d840" stop-opacity=".72"/>
+      <stop offset="100%" stop-color="#90d840" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Work+: right, blue -->
+    <radialGradient id="a-work" cx="80%" cy="46%" r="50%">
+      <stop offset="0%" stop-color="#4090e8" stop-opacity=".68"/>
+      <stop offset="100%" stop-color="#4090e8" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Supply+: bottom-right, amber -->
+    <radialGradient id="a-sup" cx="68%" cy="74%" r="50%">
+      <stop offset="0%" stop-color="#f0b030" stop-opacity=".68"/>
+      <stop offset="100%" stop-color="#f0b030" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Care+: bottom-left, coral -->
+    <radialGradient id="a-care" cx="34%" cy="76%" r="52%">
+      <stop offset="0%" stop-color="#f07050" stop-opacity=".70"/>
+      <stop offset="100%" stop-color="#f07050" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Enjoy+: left, purple -->
+    <radialGradient id="a-enjoy" cx="22%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9070e0" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#9070e0" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Live+: top-left, teal -->
+    <radialGradient id="a-live" cx="28%" cy="28%" r="50%">
+      <stop offset="0%" stop-color="#20b0c0" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#20b0c0" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Collab: center-bloom, pink — closest to center -->
+    <radialGradient id="a-collab" cx="50%" cy="50%" r="42%">
+      <stop offset="0%" stop-color="#e03880" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#e03880" stop-opacity="0"/>
+    </radialGradient>
+
+    <path id="r5b"  d="M180 330 A80  80  0 0 1 180 192"/>
+    <path id="r10b" d="M130 370 A142 142 0 0 1 130 152"/>
+    <path id="r15b" d="M78  405 A212 212 0 0 1 78  118"/>
+  </defs>
+
+  <!-- BG -->
+  <circle cx="260" cy="260" r="212" fill="#0d1b2a" stroke="rgba(125,192,189,0.18)" stroke-width="0.8"/>
+
+  <!-- Color blobs -->
+  <g clip-path="url(#mc2)">
+    <ellipse cx="325" cy="148" rx="162" ry="150" fill="url(#a-edu)"/>
+    <ellipse cx="385" cy="262" rx="128" ry="115" fill="url(#a-work)"/>
+    <ellipse cx="348" cy="368" rx="150" ry="120" fill="url(#a-sup)"/>
+    <ellipse cx="195" cy="372" rx="148" ry="118" fill="url(#a-care)"/>
+    <ellipse cx="158" cy="260" rx="128" ry="118" fill="url(#a-enjoy)"/>
+    <ellipse cx="182" cy="155" rx="148" ry="132" fill="url(#a-live)"/>
+    <!-- Collab bloom: center, on top -->
+    <ellipse cx="260" cy="260" rx="115" ry="115" fill="url(#a-collab)"/>
+  </g>
+
+  <!-- Distance rings -->
+  <circle cx="260" cy="260" r="80"  fill="none" stroke="#a080c0" stroke-width="0.8" stroke-dasharray="5 4"/>
+  <circle cx="260" cy="260" r="142" fill="none" stroke="#a080c0" stroke-width="0.8" stroke-dasharray="5 4"/>
+  <circle cx="260" cy="260" r="212" fill="none" stroke="#a080c0" stroke-width="1"   stroke-dasharray="5 4"/>
+
+  <!-- Wedge shading bottom-left -->
+  <path d="M260 260 L95 382 A212 212 0 0 1 88 148 Z" fill="#8060c0" fill-opacity=".06"/>
+
+  <!-- Distance labels -->
+  <text font-size="10.5" fill="#b6a2e2" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r5b"  startOffset="12%">即时触达</textPath>
+  </text>
+  <text font-size="10.5" fill="#b6a2e2" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r10b" startOffset="10%">十分钟</textPath>
+  </text>
+  <text font-size="10.5" fill="#b6a2e2" font-family="var(--font-sans,sans-serif)">
+    <textPath href="#r15b" startOffset="8%">十五分钟慢行</textPath>
+  </text>
+
+  <!-- ── FACILITY NODES ── -->
+
+  <!-- 教育+: 开放实验室 top-center -->
+  <circle cx="275" cy="185" r="29" fill="#78cc30" stroke="white" stroke-width="2.5"/>
+  <text x="275" y="180" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🔬</text>
+  <text x="275" y="196" text-anchor="middle" font-size="8.5" fill="#1e3a00" font-family="var(--font-sans,sans-serif)" font-weight="500">开放实验室</text>
+
+  <!-- 教育+: 全龄工作坊 top-right -->
+  <circle cx="355" cy="142" r="29" fill="#58b818" stroke="white" stroke-width="2.5"/>
+  <text x="355" y="137" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🧑‍💻</text>
+  <text x="355" y="153" text-anchor="middle" font-size="8.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">全龄工作坊</text>
+
+  <!-- 教育+: 黑客松空间 far top-right -->
+  <circle cx="400" cy="88" r="27" fill="#3a9800" stroke="white" stroke-width="2.5"/>
+  <text x="400" y="83" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">⚡</text>
+  <text x="400" y="98" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">黑客松空间</text>
+
+  <!-- 工作+: Demo Day 场地 right -->
+  <circle cx="430" cy="225" r="29" fill="#2878e0" stroke="white" stroke-width="2.5"/>
+  <text x="430" y="220" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🚀</text>
+  <text x="430" y="236" text-anchor="middle" font-size="8.5" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">Demo Day</text>
+
+  <!-- 工作+: 孵化器/投资人驻场 far right -->
+  <circle cx="438" cy="295" r="27" fill="#1858c0" stroke="white" stroke-width="2.5"/>
+  <text x="438" y="290" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">💡</text>
+  <text x="438" y="305" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">孵化器</text>
+
+  <!-- 供给+: 智能配送站 bottom-right -->
+  <circle cx="385" cy="360" r="27" fill="#d89018" stroke="white" stroke-width="2.5"/>
+  <text x="385" y="355" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">📦</text>
+  <text x="385" y="370" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">智能配送站</text>
+
+  <!-- 供给+: 订阅餐饮/社群食堂 bottom -->
+  <circle cx="318" cy="398" r="27" fill="#b87010" stroke="white" stroke-width="2.5"/>
+  <text x="318" y="393" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🍱</text>
+  <text x="318" y="408" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">社群食堂</text>
+
+  <!-- 关怀+: AI健康监测站 bottom-left -->
+  <circle cx="210" cy="390" r="29" fill="#e05838" stroke="white" stroke-width="2.5"/>
+  <text x="210" y="385" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🩺</text>
+  <text x="210" y="401" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">AI健康监测</text>
+
+  <!-- 关怀+: 心理支持空间 left-bottom -->
+  <circle cx="155" cy="340" r="27" fill="#c04030" stroke="white" stroke-width="2.5"/>
+  <text x="155" y="335" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🧠</text>
+  <text x="155" y="350" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">心理支持</text>
+
+  <!-- 享受+: 人机共创展厅 left -->
+  <circle cx="130" cy="255" r="29" fill="#7050d0" stroke="white" stroke-width="2.5"/>
+  <text x="130" y="250" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🎨</text>
+  <text x="130" y="266" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">人机共创展厅</text>
+
+  <!-- 享受+: 社群咖啡/草坪 left-up -->
+  <circle cx="165" cy="188" r="27" fill="#5038b0" stroke="white" stroke-width="2.5"/>
+  <text x="165" y="183" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">☕</text>
+  <text x="165" y="198" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">社群咖啡</text>
+
+  <!-- 居住+: 青年公寓/弹性SOHO top-left -->
+  <circle cx="152" cy="132" r="29" fill="#1098a8" stroke="white" stroke-width="2.5"/>
+  <text x="152" y="127" text-anchor="middle" font-size="16" font-family="var(--font-sans,sans-serif)">🏠</text>
+  <text x="152" y="143" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">弹性 SOHO</text>
+
+  <!-- 协作★: AI信任节点 inner-ring right-center -->
+  <circle cx="340" cy="270" r="29" fill="#c02870" stroke="white" stroke-width="3"/>
+  <text x="340" y="265" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🤝</text>
+  <text x="340" y="281" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">AI 信任节点</text>
+
+  <!-- 协作★: 具身智能体验区 inner-ring bottom -->
+  <circle cx="260" cy="340" r="27" fill="#a01858" stroke="white" stroke-width="3"/>
+  <text x="260" y="335" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🤖</text>
+  <text x="260" y="350" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">具身智能站</text>
+
+  <!-- 协作★: 机器人委托界面 inner-ring left -->
+  <circle cx="188" cy="268" r="27" fill="#a01858" stroke="white" stroke-width="3"/>
+  <text x="188" y="263" text-anchor="middle" font-size="15" font-family="var(--font-sans,sans-serif)">🦾</text>
+  <text x="188" y="278" text-anchor="middle" font-size="8" fill="white" font-family="var(--font-sans,sans-serif)" font-weight="500">机器人委托站</text>
+
+  <!-- ── CENTER: 社群 ── -->
+  <circle cx="260" cy="260" r="44" fill="#6030a8" stroke="white" stroke-width="3.5"/>
+  <text x="260" y="253" text-anchor="middle" font-size="20" font-weight="700" fill="white" font-family="var(--font-sans,sans-serif)">社群</text>
+  <text x="260" y="271" text-anchor="middle" font-size="9"  fill="white" opacity=".9" font-family="var(--font-sans,sans-serif)">使命·兴趣·信任</text>
+
+  <!-- Collab ring highlight -->
+  <circle cx="260" cy="260" r="80" fill="none" stroke="#c02870" stroke-width="1.2" stroke-dasharray="3 3" opacity=".6"/>
+
+  <!-- ★ NEW badge near collab nodes -->
+  <rect x="305" y="234" width="28" height="13" rx="4" fill="#c02870"/>
+  <text x="319" y="244" text-anchor="middle" font-size="8" fill="white" font-weight="500" font-family="var(--font-sans,sans-serif)">★ 新</text>
+
+  <!-- Outer floating labels -->
+  <text x="408" y="52"  text-anchor="middle" font-size="10" fill="#a6df72" font-family="var(--font-sans,sans-serif)">黑客松空间</text>
+  <text x="82"  y="98"  font-size="10" fill="#74d2da" font-family="var(--font-sans,sans-serif)">弹性居住 SOHO</text>
+  <text x="462" y="220" font-size="10" fill="#84b8f2" font-family="var(--font-sans,sans-serif)">Demo Day</text>
+  <text x="465" y="298" font-size="10" fill="#84b8f2" font-family="var(--font-sans,sans-serif)">孵化器</text>
+  <text x="355" y="440" text-anchor="middle" font-size="9.5" fill="#f0c878" font-family="var(--font-sans,sans-serif)">智能配送站·社群食堂</text>
+  <text x="82"  y="340" font-size="9.5" fill="#f2998a" font-family="var(--font-sans,sans-serif)">心理支持空间</text>
+  </svg></div>
+        <div class="proto-leg">
+          <span class="pchip" style="--c:#58b818">教育+</span>
+          <span class="pchip" style="--c:#2878e0">工作+</span>
+          <span class="pchip" style="--c:#d89018">供给+</span>
+          <span class="pchip" style="--c:#e05838">关怀+</span>
+          <span class="pchip" style="--c:#7050d0">享受+</span>
+          <span class="pchip" style="--c:#1098a8">居住+</span>
+          <span class="pchip pchip--new" style="--c:#c02870">协作 ★</span>
+        </div>
+      </figure>
+
+      <div class="proto-side proto-side--ai">
+        <p>而 2026 年的北京，<span class="bold">当 AI 正在重塑生活与生产关系</span>，城市也需要一种与之适配的空间原型——<span class="gold">15 分钟 AI 社群圈</span>由此产生。它以<span class="gold">「信任关系」</span>为组织逻辑，人因共同兴趣与信任聚集，居住、工作、教育、休闲、协作等功能围绕这一核心自组织生长。</p>
+      </div>
+    </div>
+
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">05</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 4 · STRATEGY 2: AI + EVERY INDUSTRY ─── -->
+<div class="sw" id="s4">
+  <div class="slide">
+    <div class="wm">02</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略二 · AI + Every Industry</span>
+    </div>
+    <div class="h-zh">全球 AI 产业高地</div>
+    <div class="h-en">Global AI Industry Hub — China's Answer to Industrial Organization in the Age of AI</div>
+    <div class="sep"></div>
+
+    <div class="strat-wrap">
+      <div class="strat-left">
+        <div class="strat-tag">全球 AI 产业高地</div>
+        <div class="strat-tag-en">AI 时代产业组织方式的中国答案</div>
+        <div class="strat-zh">AI + Every Industry</div>
+        <div class="strat-en">Global AI Industry Hub<br>China's Answer to Industrial<br>Organization in the Age of AI</div>
+        <div class="strat-lead">产业高地不是人才的简单聚集，而是让人才有效创新的系统。</div>
+      </div>
+      <div class="strat-right">
+        <p>海淀的问题从来不是人才不够多，而是<span class="bold">人才密度没有转化为创新密度</span>——产学研之间的组织边界阻隔了信任的流动，缺少让真实信任自然生长的非正式空间，资本与技术之间缺乏足够深度的对话渠道和信任关系。</p>
+        <p>"怎么组织高密度人才实现有效创新"这个问题的真正难点不在于知道该做什么，而在于：政府主导的组织逻辑，和创新所需要的开放与自发性，存在内在的张力。海淀真正的设计挑战是：如何让政府做它擅长的事（基础设施、资本、保护），<span class="gold">用国家能力做硅谷做不到的事</span>；同时真正放开它不擅长的事（知识流动、跨界混合、组织自发性）。</p>
+        <p>打破校区园区边界，让产学研在日常空间中自然渗透；优化空间密度和供给，创造更高频率的有效碰撞；建立真正的第三空间，让非正式的交流成为创新发生的日常条件。AI 渗透每一个行业的产业演化，<span class="bold">垂直整合的研发—产品—应用—数据回路</span>，需要一个能够高效支撑这种演化的产业空间载体。这一命题也将助力海淀成为<span class="bold">全球 AI 产业聚集和组织的壁垒和高地</span>。</p>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">06</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STRATEGY 2 · JUDGMENT 1 · TALENT ≠ INNOVATION ─── -->
+<div class="sw" id="s4a">
+  <div class="slide judge-slide">
+    <div class="wm">02</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略二 · 判断一 · Talent ≠ Innovation</span>
+    </div>
+    <div class="h-zh">人才密度 ≠ 创新密度</div>
+    <div class="h-en">Why a Concentration of Talent Does Not Equal a Concentration of Innovation</div>
+    <div class="sep"></div>
+
+    <div class="judge-lead">
+      有一个隐含假设——<span class="bold">人才聚在一起，创新就会自然发生</span>——但它是错的。按论文贡献衡量，中国在 NeurIPS 顶会的份额已接近半数、稳居世界第一，而北京一城就占到全国的 16%，海淀更坐拥 80+ 高校与百度、字节、小米等顶级力量。但没有人会说海淀的创新生态已经超越硅谷。问题从不在人多不多，而在：<span class="gold">人才密度，如何转化为创新密度？</span>
+    </div>
+
+    <div class="judge-charts">
+      <!-- LEFT: donut -->
+      <figure class="chart-card">
+        <figcaption class="chart-title">全球 · 顶会论文贡献份额<span class="chart-sub">Regional share of top-AI-conference contributions</span></figcaption>
+        <div class="donut-wrap">
+          <svg id="donutA" viewBox="0 0 200 200" class="donut-svg"></svg>
+          <div class="donut-center">
+            <div id="donutVal" class="donut-val">48.68%</div>
+            <div id="donutLab" class="donut-lab">中国 · China</div>
+          </div>
+        </div>
+        <div id="donutLegend" class="donut-legend"></div>
+      </figure>
+
+      <!-- RIGHT: China by region/institution -->
+      <figure class="chart-card">
+        <figcaption class="chart-title">中国 · 按区域与机构<span class="chart-sub">China · by region & institution</span></figcaption>
+        <div class="region-list">
+          <div class="region-row" style="--bar:97%;--rc:#d24b3e">
+            <div class="region-head"><span class="region-name">北京</span><span class="region-pct">16.11%</span></div>
+            <div class="region-bar"><span></span></div>
+            <div class="region-insts">清华 4.73 · 北大 3.63 · 中科院 3.24 · 字节 2.10 · 北航 1.27 · 北理工 1.14</div>
+          </div>
+          <div class="region-row" style="--bar:89%;--rc:#3a6fd8">
+            <div class="region-head"><span class="region-name">沪杭</span><span class="region-pct">14.82%</span></div>
+            <div class="region-bar"><span></span></div>
+            <div class="region-insts">上海交大 3.13 · 浙大 2.82 · 南大 2.47 · 阿里 2.23 · 上海AI实验室 2.11 · 复旦 2.06</div>
+          </div>
+          <div class="region-row" style="--bar:71%;--rc:#3a9e6e">
+            <div class="region-head"><span class="region-name">大湾区</span><span class="region-pct">11.71%</span></div>
+            <div class="region-bar"><span></span></div>
+            <div class="region-insts">港科大(广州) 2.99 · 港中文 2.63 · 港大 1.67 · 腾讯 1.58 · 中山大学 1.43 · 华为 1.41</div>
+          </div>
+          <div class="region-row" style="--bar:13%;--rc:#e08a2e">
+            <div class="region-head"><span class="region-name">武汉</span><span class="region-pct">2.12%</span></div>
+            <div class="region-bar"><span></span></div>
+            <div class="region-insts">华中科大 1.06 · 武汉大学 1.06</div>
+          </div>
+        </div>
+      </figure>
+    </div>
+
+    <div class="judge-foot">
+      <span class="judge-src">数据：MacroPolo 全球 AI 人才追踪 3.0 · 基于 NeurIPS / ICML / ICLR 顶会论文贡献（分数计数法）</span>
+      <span class="judge-punch"><span class="bold">密度不会自动变成创新。</span>海淀缺的不是人才，而是让信任与知识在组织边界间<span class="gold">渗透</span>的机制。</span>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">07</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STRATEGY 2 · JUDGMENT 2 · GEOGRAPHY OF INNOVATION ─── -->
+<div class="sw" id="s4b">
+  <div class="slide sf-slide">
+    <div class="wm">02</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略二 · 判断二 · Geography of Innovation</span>
+    </div>
+    <div class="h-zh">创新发生在街头，不在会议室</div>
+    <div class="h-en">The Center of Gravity Has Moved — From the Valley to the City</div>
+    <div class="sep"></div>
+
+    <div class="sf-body sf-body--split">
+      <!-- MAP (left) -->
+<figure class="sf-map-card">
+        <svg viewBox="0 0 480 372" class="sf-map">
+          <defs>
+            <radialGradient id="bayG" cx="78%" cy="40%" r="80%">
+              <stop offset="0%" stop-color="#16404a" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#0a1c28" stop-opacity=".15"/>
+            </radialGradient>
+          </defs>
+          <!-- bay backdrop -->
+          <rect x="0" y="0" width="480" height="372" fill="url(#bayG)"/>
+          <path d="M300 30 q40 60 30 130 q-12 80 18 150 M340 60 q34 70 20 150" fill="none" stroke="#2e6470" stroke-width="1" stroke-opacity=".4" stroke-dasharray="3 6"/>
+          <!-- land -->
+          <path d="M52 44 L236 58 Q262 96 258 150 Q250 250 232 300 Q200 344 150 340 Q86 332 64 300 Q40 240 44 150 Q44 92 52 44 Z"
+                fill="#0e2330" stroke="rgba(125,192,189,0.35)" stroke-width="1.2"/>
+          <text x="150" y="36" text-anchor="middle" class="sf-water-lbl">San Francisco Bay · 旧金山湾</text>
+
+          <!-- work cluster zones -->
+          <ellipse class="sf-zone sf-zone--work" cx="168" cy="172" rx="40" ry="30"/>
+          <ellipse class="sf-zone sf-zone--work" cx="232" cy="236" rx="36" ry="28"/>
+          <!-- social zone -->
+          <ellipse class="sf-zone sf-zone--social" cx="92" cy="158" rx="30" ry="22"/>
+
+          <!-- neighborhood labels -->
+          <text x="206" y="80"  class="sf-nbhd">金融区</text>
+          <text x="190" y="126" class="sf-nbhd">Yerba Buena</text>
+          <text x="168" y="176" class="sf-nbhd sf-nbhd--key">SoMa</text>
+          <text x="244" y="150" class="sf-nbhd">South Beach</text>
+          <text x="232" y="240" class="sf-nbhd sf-nbhd--key">Mission Bay</text>
+          <text x="226" y="300" class="sf-nbhd">Dogpatch</text>
+          <text x="172" y="284" class="sf-nbhd">Potrero Hill</text>
+          <text x="108" y="232" class="sf-nbhd">Mission</text>
+          <text x="92"  y="160" class="sf-nbhd sf-nbhd--social">Hayes Valley</text>
+          <text x="70"  y="64"  class="sf-nbhd sf-nbhd--faint">Presidio</text>
+
+          <!-- company dots: SoMa cluster -->
+          <g class="sf-dots">
+            <circle cx="150" cy="160" r="3"/><circle cx="160" cy="168" r="3"/><circle cx="172" cy="160" r="3"/>
+            <circle cx="182" cy="170" r="3"/><circle cx="156" cy="180" r="3"/><circle cx="170" cy="184" r="3"/>
+            <circle cx="184" cy="158" r="3"/><circle cx="146" cy="172" r="3"/>
+            <!-- Mission Bay cluster -->
+            <circle cx="220" cy="226" r="3"/><circle cx="234" cy="230" r="3"/><circle cx="246" cy="238" r="3"/>
+            <circle cx="226" cy="244" r="3"/><circle cx="240" cy="248" r="3"/><circle cx="216" cy="240" r="3"/>
+            <!-- scattered -->
+            <circle cx="248" cy="150" r="3"/><circle cx="206" cy="86" r="3"/><circle cx="112" cy="222" r="3"/>
+            <circle cx="124" cy="234" r="3"/><circle cx="222" cy="296" r="3"/>
+          </g>
+          <!-- anchor companies -->
+          <circle class="sf-anchor" cx="166" cy="172" r="6"/>
+          <text x="166" y="200" text-anchor="middle" class="sf-anchor-lbl">Anthropic · 500 Howard</text>
+          <circle class="sf-anchor sf-anchor--o" cx="232" cy="236" r="6"/>
+          <text x="232" y="264" text-anchor="middle" class="sf-anchor-lbl">OpenAI · Mission Bay</text>
+
+          <!-- South Bay inset -->
+          <g class="sf-southbay">
+            <rect x="300" y="278" width="166" height="78" rx="8"/>
+            <text x="312" y="298" class="sf-sb-title">南湾 South Bay</text>
+            <text x="312" y="312" class="sf-sb-sub">成熟大厂据点 · Legacy giants</text>
+            <text x="312" y="330" class="sf-sb-chip">Google 山景城 · Meta 门洛帕克</text>
+            <text x="312" y="345" class="sf-sb-chip">NVIDIA 圣克拉拉 · SSI 帕洛阿尔托</text>
+          </g>
+          <!-- shift arrow -->
+          <path d="M356 276 Q300 230 256 218" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+          <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--gold)"/></marker></defs>
+          <text x="300" y="250" class="sf-shift-lbl">重心北移</text>
+        </svg>
+        <div class="sf-maplegend">
+          <span class="sfk"><i class="sfk-dot"></i>AI 公司 / 基础模型</span>
+          <span class="sfk"><i class="sfk-dot sfk-dot--work"></i>工作基础设施 · SoMa / Mission Bay</span>
+          <span class="sfk"><i class="sfk-dot sfk-dot--social"></i>社交基础设施 · Cerebral Valley</span>
+          <span class="sfk sfk--faint"><i class="sfk-dot sfk-dot--faint"></i>南湾大厂据点</span>
+        </div>
+      </figure>
+
+      <!-- ALL TEXT (right) -->
+      <div class="sf-textcol">
+        <p class="sf-lead">
+          AI 的重心已从硅谷（南湾园区）明确转移到<span class="bold">旧金山市区</span>。原因不是房租或交通——早期 AI 研究者想要的是城市的生活方式：<span class="gold">可步行、可偶遇</span>，能在咖啡馆撞见另一家公司的人，在 Hayes Valley 的晚宴上认识投资人。创新往往发生在非正式场合，而非大厂的会议室；城市的物理密度，让不同公司的研究员与创始人之间的<span class="gold">非正式相遇频率</span>，远高于郊区园区。
+        </p>
+
+        <div class="sf-note">
+          <div class="sf-note-h">① 功能的地理分离</div>
+          <p>Hayes Valley 被称作 AI 的「Cerebral Valley」，每晚餐厅里都有黑客松和 AI 讨论——但它是<span class="bold">社交基础设施</span>；真正的办公室在 SoMa 与 Mission Bay，是<span class="bold">工作基础设施</span>。两者地理分离，本身就意味深长。</p>
+        </div>
+        <div class="sf-note">
+          <div class="sf-note-h">② 传统硅谷没死，只是换了角色</div>
+          <p>Google、Meta、NVIDIA、SSI 仍在南湾——那里成了「成熟大厂据点」；旧金山则是<span class="bold">新一代 AI 原生公司</span>的聚集地。</p>
+        </div>
+        <div class="sf-note">
+          <div class="sf-note-h">③ 一个反向信号</div>
+          <p>OpenAI 开始向南湾郊区扩张。<span class="muted">早期选城市密度、成熟后回园区</span>——与上一代科技公司路径惊人相似，是「AI 公司在长大」的信号。</p>
+        </div>
+
+        <div class="sf-chips">
+          <span class="sf-chip">全城 AI 在租 ≈ 900 万 sqft</span>
+          <span class="sf-chip">Mission Bay 空置率 9.1% <span class="muted">vs 全城 30%+</span></span>
+          <span class="sf-chip">OpenAI &gt; 100 万 sqft · Mission Bay</span>
+          <span class="sf-chip">Anthropic ≈ 90 万 sqft · 「AI Alley」</span>
+        </div>
+
+        <div class="sf-srcpunch">
+          <span class="judge-punch"><span class="bold">创新发生在街头，不在会议室。</span>海淀真正该学的，不是更多园区，而是让陌生人高频偶遇、让信任自然生长的<span class="gold">城市密度与非正式空间</span>。</span>
+          <span class="judge-src">来源：The San Francisco Standard（2026.01 / 2026.04）· JLL · Cushman &amp; Wakefield</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">08</span>
+    </div>
+  </div>
+</div>
+<!-- ─── STRATEGY 2 · JUDGMENT 3 · THE ECONOMICS OF AI ─── -->
+<div class="sw" id="s4c">
+  <div class="slide econ-slide">
+    <div class="wm">02</div>
+
+    <div class="srow">
+      <span class="snum">三 · Dual Positioning & Strategy</span>
+      <span class="snum-zh">策略二 · 判断三 · The Economics of AI</span>
+    </div>
+    <div class="h-zh">AI 的下半场：烧掉的钱，从哪里赚回来？</div>
+    <div class="h-en">The Second Half of AI — Where Does the Burned Capital Come Back From?</div>
+    <div class="sep"></div>
+
+    <div class="econ-body">
+      <!-- LEFT: value-chain stack -->
+      <div class="stack-card">
+        <div class="stack-cap">AI 产业生态 · 价值链分层<span class="stack-cap-en">中美优势分布 · who leads each layer</span></div>
+        <div class="stack">
+          <div class="stack-group stack-group--up">
+            <span class="stack-side-tag">上游 · 资本密集 · 钱烧在这里</span>
+            <div class="stack-rows">
+              <div class="layer"><span class="layer-no">1</span><span class="layer-ic">⚡</span><span class="layer-tx"><b>能源层</b><i>Energy</i></span><span class="side side--cn">中</span></div>
+              <div class="layer"><span class="layer-no">2</span><span class="layer-ic">🧩</span><span class="layer-tx"><b>芯片层</b><i>Chip</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">3</span><span class="layer-ic">🗄️</span><span class="layer-tx"><b>基础设施层</b><i>Infrastructure</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">4</span><span class="layer-ic">🧠</span><span class="layer-tx"><b>大型语言模型</b><i>LLM</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">5</span><span class="layer-ic">📄</span><span class="layer-tx"><b>上下文窗口</b><i>Context Window</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">6</span><span class="layer-ic">💾</span><span class="layer-tx"><b>长期存储</b><i>Long-term Storage</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">7</span><span class="layer-ic">🔧</span><span class="layer-tx"><b>工具集成</b><i>Tool Integrations</i></span><span class="side side--us">美</span></div>
+              <div class="layer"><span class="layer-no">8</span><span class="layer-ic">⚙️</span><span class="layer-tx"><b>智能体框架</b><i>Agent Harness</i></span><span class="side side--both">中·美</span></div>
+            </div>
+          </div>
+          <div class="stack-group stack-group--down">
+            <span class="stack-side-tag stack-side-tag--gold">下游 · 价值变现 · 钱要在这里赚回来</span>
+            <div class="stack-rows">
+              <div class="layer layer--down"><span class="layer-no">9</span><span class="layer-ic">✨</span><span class="layer-tx"><b>智能体</b><i>Agent</i></span><span class="side side--both">中·美</span></div>
+              <div class="layer layer--down"><span class="layer-no">10</span><span class="layer-ic">👥</span><span class="layer-tx"><b>AI Native 部门</b><i>AI Native Department</i></span><span class="side side--cn">中</span></div>
+              <div class="layer layer--down"><span class="layer-no">11</span><span class="layer-ic">🏢</span><span class="layer-tx"><b>AI Native 公司</b><i>AI Native Company</i></span><span class="side side--cn">中</span></div>
+              <div class="layer layer--down"><span class="layer-no">12</span><span class="layer-ic">🌐</span><span class="layer-tx"><b>AI Native 经济生态</b><i>AI Native Economy</i></span><span class="side side--cn">中</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: argument -->
+      <div class="econ-text">
+        <p class="econ-lead">
+          AI 进入下半场，所有大模型公司都绕不开同一个问题：<span class="bold">巨额资本开支，如何变成可持续的收入。</span>在产业生态里中美优势各异——美国主导烧钱的<span class="gold">上游</span>（芯片、基础设施、模型、工具），中国的结构性机会在能把 AI 变现的<span class="gold">下游</span>（应用与 AI Native 经济生态）。
+        </p>
+
+        <div class="econ-stats">
+          <div class="stat"><div class="stat-v">≈ 3.45 亿</div><div class="stat-k">豆包月活 · 全国第一</div></div>
+          <div class="stat stat--warn"><div class="stat-v">≈ 438 亿/年</div><div class="stat-k">仅推理算力 · ≈1.2 亿/天（估算）</div></div>
+          <div class="stat stat--warn"><div class="stat-v">≈ 2000 亿</div><div class="stat-k">字节 2026 资本开支 · 逾 850 亿买芯片</div></div>
+        </div>
+        <div class="econ-gap">月活全国第一，C 端却几乎不产生直接现金流——<span class="bold">投入与回报的剪刀差</span>，是所有大模型公司的共同困境。</div>
+
+        <p class="econ-p">
+          巨额投入已直接拖累利润（字节 2025 净利润同比下滑逾 70%）；全球同此——高盛估算 2025–2027 美国头部科技 AI 基建资本开支高达 <span class="bold">1.4 万亿美元</span>，回报却远低于预期。这条路<span class="muted">不能只靠发债与货币放水</span>。
+        </p>
+
+        <div class="econ-concl">
+          <span class="econ-concl-tag">结论 · The Way Out</span>
+          <span class="econ-concl-body">出路不在上游的军备竞赛，而在下游：构建对各行各业<span class="gold">真正有价值</span>的 AI，让 AI Native 经济生态成立。这正是 <span class="bold">AI + Every Industry</span> 的真义——也是海淀乃至全球都必须解决的命题。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="judge-foot">
+      <span class="judge-src">数据：36氪 · 钛媒体 · 21经济网 · 火山引擎披露 · 高盛 2026（豆包月活/Token/资本开支为公开报道与调研估算）</span>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">09</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 5 · CLOSING ─── -->
+<div class="sw" id="s5">
+  <div class="slide closing">
+
+    <div class="closing-eyebrow">四 · Conclusion · 海淀的使命</div>
+    <div class="closing-headline-zh">海淀，创造 AI 时代的新文明</div>
+    <div class="closing-headline-en">Haidian — Building a New Civilization for the Age of Artificial Intelligence</div>
+
+    <div class="closing-pillars">
+      <div class="closing-pillar">
+        <div class="pillar-strategy">AI-First City</div>
+        <div class="pillar-zh">全球 AI 城市样板</div>
+        <div class="pillar-en">Global AI City Prototype</div>
+      </div>
+      <div class="closing-pillar">
+        <div class="pillar-strategy">AI + Every Industry</div>
+        <div class="pillar-zh">全球 AI 产业高地</div>
+        <div class="pillar-en">Global AI Industry Hub</div>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="foot-label">百年京张 AI 创新带城市设计 · Tekuma</span>
+      <span class="foot-pg">10</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .deck -->
+
+<script>
+const slides = document.querySelectorAll('.sw');
+const dots   = document.querySelectorAll('.dot');
+const deck   = document.getElementById('deck');
+
+function go(i) { slides[i].scrollIntoView({ behavior: 'smooth' }); }
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = [...slides].indexOf(e.target);
+      e.target.classList.add('in');
+      dots.forEach((d, j) => d.classList.toggle('on', i === j));
+    }
+  });
+}, { threshold: 0.5, root: deck });
+
+slides.forEach(s => obs.observe(s));
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  const cur = [...slides].findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top >= -deck.scrollTop && r.top < window.innerHeight / 2;
+  });
+  let active = 0;
+  dots.forEach((d, i) => { if (d.classList.contains('on')) active = i; });
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') go(Math.min(active + 1, slides.length - 1));
+  if (e.key === 'ArrowUp'   || e.key === 'PageUp')   go(Math.max(active - 1, 0));
+});
+</script>
+<script>
+(function(){
+  var data=[
+    {n:'中国',e:'China',v:48.68,c:'#d24b3e'},
+    {n:'美国',e:'United States',v:35.47,c:'#3a6fd8'},
+    {n:'新加坡',e:'Singapore',v:5.61,c:'#3a9e6e'},
+    {n:'欧洲',e:'Europe',v:5.35,c:'#7a52c8'},
+    {n:'韩国',e:'South Korea',v:1.61,c:'#e08a2e'},
+    {n:'其他',e:'Rest of World',v:3.28,c:'#7a8696'}
+  ];
+  var svg=document.getElementById('donutA');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  var cx=100,cy=100,r=66,sw=24,C=2*Math.PI*r;
+  var total=data.reduce(function(a,d){return a+d.v;},0);
+  var valEl=document.getElementById('donutVal');
+  var labEl=document.getElementById('donutLab');
+  var leg=document.getElementById('donutLegend');
+  var arcs=[]; var acc=0;
+  data.forEach(function(d){
+    var frac=d.v/total, len=frac*C;
+    var c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r',r);
+    c.setAttribute('fill','none');c.setAttribute('stroke',d.c);
+    c.setAttribute('stroke-width',sw);
+    c.setAttribute('stroke-dasharray',len+' '+(C-len));
+    c.setAttribute('transform','rotate('+(acc/total*360-90)+' '+cx+' '+cy+')');
+    c.style.transition='stroke-width .2s ease, opacity .2s ease';
+    c.style.cursor='pointer';
+    c.addEventListener('mouseenter',function(){
+      arcs.forEach(function(a){a.style.opacity='.3';});
+      c.style.opacity='1'; c.setAttribute('stroke-width',sw+5);
+      valEl.textContent=d.v.toFixed(2)+'%'; labEl.textContent=d.n+' · '+d.e;
+    });
+    c.addEventListener('mouseleave',function(){
+      arcs.forEach(function(a){a.style.opacity='1';});
+      c.setAttribute('stroke-width',sw);
+      valEl.textContent='48.68%'; labEl.textContent='中国 · China';
+    });
+    svg.appendChild(c); arcs.push(c); acc+=d.v;
+    var item=document.createElement('span'); item.className='dleg';
+    item.innerHTML='<i style="background:'+d.c+'"></i>'+d.n+' '+d.v.toFixed(2)+'%';
+    leg.appendChild(item);
+  });
+})();
+</script>
+</body>
+</html>
